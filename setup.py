@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ArchesDevTools',
+    name='arches-dev-tools',
     version='0.1.0',
     author='Adam Cox',
     author_email='adam@legiongis.com',
