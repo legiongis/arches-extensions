@@ -21,6 +21,16 @@
             <input type="search" placeholder="Search..." role="searchbox" aria-label="search"
                    pattern=".+" required>
 
+        <h2>Contents</h2>
+        <ul>
+  <li><a href="#arches-dev-tools">Arches Dev Tools</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#commands">Commands</a>
+  <ul>
+    <li><a href="#extension"><code>extension</code></a></li>
+  </ul></li>
+</ul>
+
 
         <h2>Submodules</h2>
         <ul>
@@ -43,10 +53,79 @@
                     <h1 class="modulename">
 arches_dev_tools    </h1>
 
-                
-                
-                
-                
+                        <div class="docstring"><h1 id="arches-dev-tools">Arches Dev Tools</h1>
+
+<p>The purpose of this repository is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.</p>
+
+<p>I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the commands be generic, not implementation-specific. Feel free to open a <a href="https://github.com/legiongis/arches-dev-tools/issues">ticket</a> or get in touch directly, adam@legiongis.com.</p>
+
+<h1 id="installation">Installation</h1>
+
+<p>These tools are packaged as a Django app which facilitates the easy addition of these management commands into an existing Arches installation.</p>
+
+<p>After installing Arches into your Python virtual environment, you can pip install this package directly from GitHub like so:</p>
+
+<pre><code>pip install git+https://github.com/legiongis/arches-dev-tools.git --no-binary arches-dev-tools
+</code></pre>
+
+<p>Alternatively, you can fork/clone the repo and pip install from a local clone:</p>
+
+<pre><code>git clone https://github.com/legiongis/arches-dev-tools
+pip install -e arches-dev-tools
+</code></pre>
+
+<p>Now, in your <code>settings.py</code> or <code>settings_local.py</code> file, add <code><a href="">arches_dev_tools</a></code> to your <code>INSTALLED_APPS</code>:</p>
+
+<pre><code>INSTALLED_APPS += ('arches_dev_tools',)
+</code></pre>
+
+<blockquote>
+  <p>In <code>settings_local.py</code>, add <code>from .settings import INSTALLED_APPS</code> to the top of the file.</p>
+</blockquote>
+
+<p>That's it! You can now start using these management commands and other utilities in your existing Arches project. To confirm, run</p>
+
+<pre><code>python manage.py --help
+</code></pre>
+
+<p>and you should see a new section called <code><a href="">arches_dev_tools</a></code> with a list of all management commands.</p>
+
+<p>To remove this app, remove the <code>INSTALLED_APPS</code> line above, and then run</p>
+
+<pre><code>pip uninstall arches-dev-tools
+</code></pre>
+
+<h1 id="commands">Commands</h1>
+
+<p>The management commands herein are generally designed like:</p>
+
+<pre><code>python manage.py [topic] [operation] [--extra-options]
+</code></pre>
+
+<p>Where the topic may be <code>maplayer</code> and an operation may be <code>list</code> (list all maplayers).</p>
+
+<blockquote>
+  <p><strong>IMPORTANT</strong> - Some of these commands will alter your database content, so it is always a good idea to back up your database before using them.</p>
+</blockquote>
+
+<p>In general, use <code>python manage.py [command] --help</code> to learn more about each management command. Some more explanation follows, or head to <a href="/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
+
+<h2 id="extension"><code>extension</code></h2>
+
+<p>Manage all custom extensions like widgets, functions, and datatypes. <a href="/arches_dev_tools/management/commands/extension.html">Full Documentation</a></p>
+</div>
+
+                        <input id="arches_dev_tools-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+
+                        <label class="view-source-button" for="arches_dev_tools-view-source"><span>View Source</span></label>
+
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a><span class="sd">.. include:: ../README.md</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="sd">.. include:: ./management/commands/README.md</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span></pre></div>
+
+
             </section>
     </main>
 <script>
