@@ -66,13 +66,11 @@ arches_dev_tools    </h1>
 
 <p><strong>get in touch!</strong> I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.</p>
 
-<p>Feel free to open a <a href="https://github.com/legiongis/arches-dev-tools/issues">ticket</a> or get in touch directly, adam@legiongis.com.</p>
+<p>Feel free to <a href="https://github.com/legiongis/arches-dev-tools/issues">open a ticket</a> or get in touch directly, adam@legiongis.com.</p>
 
 <h1 id="installation">Installation</h1>
 
-<p>These tools are packaged as a Django app which facilitates the easy addition of these management commands into an existing Arches installation.</p>
-
-<p>After installing Arches into your Python virtual environment, you can pip install this package directly from GitHub like so:</p>
+<p>These tools are packaged as a Django app so they can be easily integrated into an existing Arches installation. For this to work, you must install this package into your Arches virtual environment like this:</p>
 
 <pre><code>pip install git+https://github.com/legiongis/arches-dev-tools.git --no-binary arches-dev-tools
 </code></pre>
@@ -121,7 +119,7 @@ pip install -e arches-dev-tools
   <p><strong>IMPORTANT</strong> - Some of these commands will alter your database content, so it is always a good idea to back up your database before using them.</p>
 </blockquote>
 
-<p>In general, use <code>python manage.py [command] --help</code> to learn more about each management command. Some more explanation follows, or head to <a href="/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
+<p>In general, use <code>python manage.py [command] --help</code> to learn more about each management command. Some more explanation follows, or head to <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
 
 <blockquote>
   <p><strong>These are all a work in progress, some will surely fail right now</strong></p>
@@ -129,15 +127,15 @@ pip install -e arches-dev-tools
 
 <h2 id="python-managepy-extension"><code>python manage.py extension</code></h2>
 
-<p>Manage all custom extensions like widgets, functions, and datatypes. <a href="/arches_dev_tools/management/commands/extension.html">Full Documentation</a></p>
+<p>Manage all custom extensions like widgets, functions, and datatypes. Full documentation:  <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/extension.html">extension.py</a></p>
 
 <h2 id="python-managepy-indexes"><code>python manage.py indexes</code></h2>
 
-<p>Some utilities for managing ElasticSearch index content. <a href="/arches_dev_tools/management/commands/indexes.html">Full Documentation</a></p>
+<p>Some utilities for managing ElasticSearch index content. Full documentation: <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/indexes.html">indexes.py</a></p>
 
 <h2 id="python-managepy-maplayer"><code>python manage.py maplayer</code></h2>
 
-<p>Manage maplayers. <a href="/arches_dev_tools/management/commands/maplayer.html">Full Documentation</a></p>
+<p>Add, remove, list maplayers. Full documentation: <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/maplayer.html">maplayer.py</a></p>
 </div>
 
                         <input id="arches_dev_tools-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
