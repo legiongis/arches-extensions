@@ -9,52 +9,97 @@ from django.db.utils import IntegrityError
 
 class Command(BaseCommand):
     """
-    Commands for managing Arches functions
+    Use this command to manage extensions within Arches. Usage:
 
+    Manage extensions, like custom datatypes, widgets, functions, etc. 
+
+    ```
+    python manage.py extension [operation] [extension_type] [-s/--source] [-n/--name] [--overwrite]
+    ```
+
+    Operations are
+
+    - `register`
+    - `unregister`
+    - `list`
+
+    Extension types are
+
+    - `card-component`
+    - `datatype`
+    - `function`
+    - `plugin`
+    - `report`
+    - `search-filter`
+    - `widget`
+
+    > For Workflows use `plugin`.
+
+    Other arguments:
+
+    - `-s/--source` Use with `register` to provide a JSON or .py file when registering an extension. 
+    - `-n/--name` Use with `unregister` for the name of the extension to remove.
+
+    - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.
     """
+
+    def __init__(self, *args, **kwargs):
+        self.help = self.__doc__
 
     def add_arguments(self, parser):
 
         parser.add_argument(
-            "extension_type",
-            choices=["widget", "datatype", "search"]
+            "operation",
+            choices=[
+                "list",
+                "register",
+                "unregister",
+            ]
         )
 
         parser.add_argument(
-            "operation",
-            choices=["register", "unregister", "list", "update"]
+            "extension_type",
+            choices=[
+                "card-component",
+                "datatype",
+                "function",
+                "plugins",
+                "report",
+                "search-filter",
+                "widget",
+            ]
         )
 
         parser.add_argument(
             "-s", "--source",
             action="store",
-            dest="source",
-            default="",
-            help="Widget json file to be loaded",
+            help="Path to the source file for the extension to register. "\
+                "In many cases this will be a .json file, but with functions, search-filters, etc. "\
+                ", it will be a .py file.",
         )
 
         parser.add_argument(
             "-n", "--name",
             action="store",
-            dest="name",
-            default="",
-            help="The name of the widget to unregister"
+            help="The name of the extension to unregister."
+        )
+
+        parser.add_argument(
+            "--overwrite",
+            action="store_true",
+            help="Overwrite existing extension that matches the input extension name.",
         )
 
     def handle(self, *args, **options):
 
-
         if options["operation"] == "register":
-            self.register(options["extension_type"], options["source"])
+            self.register(options["extension_type"], options["source"], overwrite=options['overwrite'])
 
         if options["operation"] == "unregister":
             self.unregister(options["extension_type"], name=options["name"])
 
         if options["operation"] == "list":
             self.list(options["extension_type"])
-
-        if options["operation"] == "update":
-            self.update(options["extension_type"], options["source"])
 
     def get_source_details(self, source_path):
 
@@ -90,8 +135,10 @@ class Command(BaseCommand):
             return models.DDataType
         elif extension_type == "search":
             return models.SearchComponent
+        else:
+            print("this extension type not (yet) supported.")
 
-    def register(self, extension_type, source):
+    def register(self, extension_type, source, overwrite=False):
         """
         Registers a new extension in the database based on the provided source
 
@@ -163,6 +210,9 @@ class Command(BaseCommand):
 
             instance.save()
 
+        else:
+            print("this extension type not (yet) supported.")
+
     def update(self, extension_type, source):
         """
         Updates an existing widget in the arches db
@@ -189,6 +239,9 @@ class Command(BaseCommand):
             instance.sortorder = details["sortorder"]
             instance.enabled = details["enabled"]
             instance.save()
+
+        else:
+            print("this extension type not (yet) supported.")
 
     def unregister(self, extension_type, name):
         """

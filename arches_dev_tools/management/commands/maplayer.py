@@ -9,15 +9,17 @@ from django.db.utils import IntegrityError
 
 class Command(BaseCommand):
     """
-    Commands for managing Arches functions
-
+    Manage Arches map layers with this command.
     """
+
+    def __init__(self, *args, **kwargs):
+        self.help = self.__doc__
 
     def add_arguments(self, parser):
 
         parser.add_argument(
             "operation",
-            choices=["add-layer", "remove-layer", "list-layers"]
+            choices=["add", "remove", "list"]
         )
 
         parser.add_argument(
@@ -32,16 +34,15 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-
-        if options["operation"] == "add-layer":
+        if options["operation"] == "add":
             self.add_layer(
                 options["layer_name"], options["mapbox_json_path"], options["layer_icon"], options["is_basemap"],
             )
 
-        if options["operation"] == "remove-layer":
+        if options["operation"] == "remove":
             self.remove_layer(options["name"])
 
-        if options["operation"] == "list-layers":
+        if options["operation"] == "list":
             self.list()
 
 
