@@ -6,13 +6,11 @@ The purpose of [this repository](https://github.com/legiongis/arches-dev-tools) 
 
 **get in touch!** I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.
 
-Feel free to open a [ticket](https://github.com/legiongis/arches-dev-tools/issues) or get in touch directly, adam@legiongis.com.
+Feel free to [open a ticket](https://github.com/legiongis/arches-dev-tools/issues) or get in touch directly, adam@legiongis.com.
 
 # Installation
 
-These tools are packaged as a Django app which facilitates the easy addition of these management commands into an existing Arches installation.
-
-After installing Arches into your Python virtual environment, you can pip install this package directly from GitHub like so:
+These tools are packaged as a Django app so they can be easily integrated into an existing Arches installation. For this to work, you must install this package into your Arches virtual environment like this:
 
 ```
 pip install git+https://github.com/legiongis/arches-dev-tools.git --no-binary arches-dev-tools
