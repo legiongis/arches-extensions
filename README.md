@@ -1,8 +1,6 @@
 # Arches Dev Tools
 
-The purpose of this repository is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.
-
-I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the commands be generic, not implementation-specific. Feel free to open a [ticket](https://github.com/legiongis/arches-dev-tools/issues) or get in touch directly, adam@legiongis.com.
+The purpose of [this repository](https://github.com/legiongis/arches-dev-tools) is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.
 
 # Installation
 
@@ -42,3 +40,11 @@ To remove this app, remove the `INSTALLED_APPS` line above, and then run
 ```
 pip uninstall arches-dev-tools
 ```
+
+# Documentation
+
+See [legiongis.github.io/arches-dev-tools](https://legiongis.github.io/arches-dev-tools).
+
+# Get in touch!
+
+I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the commands be generic, not implementation-specific. Feel free to open a [ticket](https://github.com/legiongis/arches-dev-tools/issues) or get in touch directly, adam@legiongis.com.
