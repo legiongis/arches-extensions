@@ -16,12 +16,12 @@ In general, use `python manage.py [command] --help` to learn more about each man
 
 ## `python manage.py extension`
 
-Manage all custom extensions like widgets, functions, and datatypes. [extension.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/extension.html)
+Manage all custom extensions like widgets, functions, and datatypes. Full documentation:  [extension.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/extension.html)
 
 ## `python manage.py indexes`
 
-Some utilities for managing ElasticSearch index content. [indexes.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/indexes.html)
+Some utilities for managing ElasticSearch index content. Full documentation: [indexes.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/indexes.html)
 
 ## `python manage.py maplayer`
 
-Add, remove, list maplayers. [maplayer.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/maplayer.html)
+Add, remove, list maplayers. Full documentation: [maplayer.py](https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands/maplayer.html)
