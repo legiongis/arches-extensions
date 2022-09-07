@@ -60,13 +60,15 @@ arches_dev_tools    </h1>
 
                         <div class="docstring"><h1 id="arches-dev-tools">Arches Dev Tools</h1>
 
-<p>The purpose of <a href="https://github.com/legiongis/arches-dev-tools">this repository</a> is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.</p>
+<p>The purpose of this package is unify some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches, and in the meantime I hope others find it helpful.</p>
 
-<p><strong>docs site</strong>: <a href="https://legiongis.github.io/arches-dev-tools">legiongis.github.io/arches-dev-tools</a>.</p>
+<p>So far, it is just a suite of Django management commands, though more content may be added in the future.</p>
 
-<p><strong>get in touch!</strong> I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.</p>
+<p><strong>repo</strong> -- <a href="https://github.com/legiongis/arches-dev-tools">legiongis/arches-dev-tools</a></p>
 
-<p>Feel free to <a href="https://github.com/legiongis/arches-dev-tools/issues">open a ticket</a> or get in touch directly, adam@legiongis.com.</p>
+<p><strong>docs site</strong> -- <a href="https://legiongis.github.io/arches-dev-tools">legiongis.github.io/arches-dev-tools</a>.</p>
+
+<p><strong>get in touch</strong> -- Feel free to <a href="https://github.com/legiongis/arches-dev-tools/issues">open a ticket</a> or get in touch directly, adam@legiongis.com. I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.</p>
 
 <h1 id="installation">Installation</h1>
 
@@ -81,25 +83,29 @@ arches_dev_tools    </h1>
 pip install -e arches-dev-tools
 </code></pre>
 
-<p>Now, in your <code>settings.py</code> or <code>settings_local.py</code> file, add <code><a href="">arches_dev_tools</a></code> to your <code>INSTALLED_APPS</code>:</p>
+<p>Now, in your Arches project's <code>settings.py</code> file, add <code><a href="">arches_dev_tools</a></code> to your <code>INSTALLED_APPS</code>:</p>
 
-<pre><code>INSTALLED_APPS += ('arches_dev_tools',)
+<pre><code>INSTALLED_APPS += ('arches_dev_tools', )
 </code></pre>
 
-<blockquote>
-  <p>In <code>settings_local.py</code>, add <code>from .settings import INSTALLED_APPS</code> to the top of the file.</p>
-</blockquote>
+<p>It may be wiser to place this in your project's <code>settings_local.py</code> file, just remember to import <code>INSTALLED_APPS</code>:</p>
 
-<p>That's it! You can now start using these management commands and other utilities in your existing Arches project. To confirm, run</p>
+<pre><code>from .settings import INSTALLED_APPS
+INSTALLED_APPS += ('arches_dev_tools', )
+</code></pre>
+
+<p>That's it! You can now start using these management commands and other utilities in your existing Arches project.</p>
+
+<p>To confirm the installation, run</p>
 
 <pre><code>python manage.py --help
 </code></pre>
 
-<p>and you should see a new section called <code><a href="">arches_dev_tools</a></code> with a list of all management commands.</p>
+<p>and you should see a new section called <code><a href="">arches_dev_tools</a></code> with a list of new commands.</p>
 
 <h2 id="uninstall">Uninstall</h2>
 
-<p>To remove this app, remove the <code>INSTALLED_APPS</code> line above, and then run</p>
+<p>To uninstall the app, remove the <code>INSTALLED_APPS</code> line above and then run</p>
 
 <pre><code>pip uninstall arches-dev-tools
 </code></pre>
