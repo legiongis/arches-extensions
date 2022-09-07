@@ -24,10 +24,15 @@
         <h2>Contents</h2>
         <ul>
   <li><a href="#arches-dev-tools">Arches Dev Tools</a></li>
-  <li><a href="#installation">Installation</a></li>
+  <li><a href="#installation">Installation</a>
+  <ul>
+    <li><a href="#uninstall">Uninstall</a></li>
+  </ul></li>
   <li><a href="#commands">Commands</a>
   <ul>
-    <li><a href="#extension"><code>extension</code></a></li>
+    <li><a href="#python-managepy-extension"><code>python manage.py extension</code></a></li>
+    <li><a href="#python-managepy-indexes"><code>python manage.py indexes</code></a></li>
+    <li><a href="#python-managepy-maplayer"><code>python manage.py maplayer</code></a></li>
   </ul></li>
 </ul>
 
@@ -55,9 +60,13 @@ arches_dev_tools    </h1>
 
                         <div class="docstring"><h1 id="arches-dev-tools">Arches Dev Tools</h1>
 
-<p>The purpose of this repository is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.</p>
+<p>The purpose of <a href="https://github.com/legiongis/arches-dev-tools">this repository</a> is to consolidate and streamline some custom utilities that I've been developing while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches.</p>
 
-<p>I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the commands be generic, not implementation-specific. Feel free to open a <a href="https://github.com/legiongis/arches-dev-tools/issues">ticket</a> or get in touch directly, adam@legiongis.com.</p>
+<p><strong>docs site</strong>: <a href="https://legiongis.github.io/arches-dev-tools">legiongis.github.io/arches-dev-tools</a>.</p>
+
+<p><strong>get in touch!</strong> I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.</p>
+
+<p>Feel free to open a <a href="https://github.com/legiongis/arches-dev-tools/issues">ticket</a> or get in touch directly, adam@legiongis.com.</p>
 
 <h1 id="installation">Installation</h1>
 
@@ -90,10 +99,14 @@ pip install -e arches-dev-tools
 
 <p>and you should see a new section called <code><a href="">arches_dev_tools</a></code> with a list of all management commands.</p>
 
+<h2 id="uninstall">Uninstall</h2>
+
 <p>To remove this app, remove the <code>INSTALLED_APPS</code> line above, and then run</p>
 
 <pre><code>pip uninstall arches-dev-tools
 </code></pre>
+
+<p>See documentation in each submodule.</p>
 
 <h1 id="commands">Commands</h1>
 
@@ -110,9 +123,21 @@ pip install -e arches-dev-tools
 
 <p>In general, use <code>python manage.py [command] --help</code> to learn more about each management command. Some more explanation follows, or head to <a href="/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
 
-<h2 id="extension"><code>extension</code></h2>
+<blockquote>
+  <p><strong>These are all a work in progress, some will surely fail right now</strong></p>
+</blockquote>
+
+<h2 id="python-managepy-extension"><code>python manage.py extension</code></h2>
 
 <p>Manage all custom extensions like widgets, functions, and datatypes. <a href="/arches_dev_tools/management/commands/extension.html">Full Documentation</a></p>
+
+<h2 id="python-managepy-indexes"><code>python manage.py indexes</code></h2>
+
+<p>Some utilities for managing ElasticSearch index content. <a href="/arches_dev_tools/management/commands/indexes.html">Full Documentation</a></p>
+
+<h2 id="python-managepy-maplayer"><code>python manage.py maplayer</code></h2>
+
+<p>Manage maplayers. <a href="/arches_dev_tools/management/commands/maplayer.html">Full Documentation</a></p>
 </div>
 
                         <input id="arches_dev_tools-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">

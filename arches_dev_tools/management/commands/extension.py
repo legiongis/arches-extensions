@@ -39,7 +39,6 @@ class Command(BaseCommand):
 
     - `-s/--source` Use with `register` to provide a JSON or .py file when registering an extension. 
     - `-n/--name` Use with `unregister` for the name of the extension to remove.
-
     - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.
     """
 
@@ -137,6 +136,7 @@ class Command(BaseCommand):
             return models.SearchComponent
         else:
             print("this extension type not (yet) supported.")
+            exit()
 
     def register(self, extension_type, source, overwrite=False):
         """

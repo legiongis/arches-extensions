@@ -125,104 +125,104 @@
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">    - `-s/--source` Use with `register` to provide a JSON or .py file when registering an extension. </span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">    - `-n/--name` Use with `unregister` for the name of the extension to remove.</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>            <span class="p">]</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="p">)</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>            <span class="p">]</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>        <span class="p">)</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>        <span class="p">)</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>        <span class="p">)</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>        <span class="p">)</span>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>            <span class="k">try</span><span class="p">:</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>            <span class="c1">## more precise exception handling would be good here</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>            <span class="n">exit</span><span class="p">()</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">    - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>            <span class="p">]</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="p">)</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>            <span class="p">]</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>        <span class="p">)</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="p">)</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="p">)</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="p">)</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>            <span class="c1">## more precise exception handling would be good here</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>            <span class="n">exit</span><span class="p">()</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>
 </span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>            <span class="n">exit</span><span class="p">()</span>
 </span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>
 </span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 </span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>        <span class="sd">&quot;&quot;&quot;</span>
@@ -409,104 +409,104 @@
 </span><span id="Command-40"><a href="#Command-40"><span class="linenos"> 40</span></a>
 </span><span id="Command-41"><a href="#Command-41"><span class="linenos"> 41</span></a><span class="sd">    - `-s/--source` Use with `register` to provide a JSON or .py file when registering an extension. </span>
 </span><span id="Command-42"><a href="#Command-42"><span class="linenos"> 42</span></a><span class="sd">    - `-n/--name` Use with `unregister` for the name of the extension to remove.</span>
-</span><span id="Command-43"><a href="#Command-43"><span class="linenos"> 43</span></a>
-</span><span id="Command-44"><a href="#Command-44"><span class="linenos"> 44</span></a><span class="sd">    - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.</span>
-</span><span id="Command-45"><a href="#Command-45"><span class="linenos"> 45</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="Command-46"><a href="#Command-46"><span class="linenos"> 46</span></a>
-</span><span id="Command-47"><a href="#Command-47"><span class="linenos"> 47</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="Command-48"><a href="#Command-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
-</span><span id="Command-49"><a href="#Command-49"><span class="linenos"> 49</span></a>
-</span><span id="Command-50"><a href="#Command-50"><span class="linenos"> 50</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
-</span><span id="Command-51"><a href="#Command-51"><span class="linenos"> 51</span></a>
-</span><span id="Command-52"><a href="#Command-52"><span class="linenos"> 52</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command-53"><a href="#Command-53"><span class="linenos"> 53</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
-</span><span id="Command-54"><a href="#Command-54"><span class="linenos"> 54</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Command-55"><a href="#Command-55"><span class="linenos"> 55</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-</span><span id="Command-56"><a href="#Command-56"><span class="linenos"> 56</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
-</span><span id="Command-57"><a href="#Command-57"><span class="linenos"> 57</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
-</span><span id="Command-58"><a href="#Command-58"><span class="linenos"> 58</span></a>            <span class="p">]</span>
-</span><span id="Command-59"><a href="#Command-59"><span class="linenos"> 59</span></a>        <span class="p">)</span>
-</span><span id="Command-60"><a href="#Command-60"><span class="linenos"> 60</span></a>
-</span><span id="Command-61"><a href="#Command-61"><span class="linenos"> 61</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command-62"><a href="#Command-62"><span class="linenos"> 62</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
-</span><span id="Command-63"><a href="#Command-63"><span class="linenos"> 63</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Command-64"><a href="#Command-64"><span class="linenos"> 64</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
-</span><span id="Command-65"><a href="#Command-65"><span class="linenos"> 65</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
-</span><span id="Command-66"><a href="#Command-66"><span class="linenos"> 66</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
-</span><span id="Command-67"><a href="#Command-67"><span class="linenos"> 67</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
-</span><span id="Command-68"><a href="#Command-68"><span class="linenos"> 68</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
-</span><span id="Command-69"><a href="#Command-69"><span class="linenos"> 69</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
-</span><span id="Command-70"><a href="#Command-70"><span class="linenos"> 70</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
-</span><span id="Command-71"><a href="#Command-71"><span class="linenos"> 71</span></a>            <span class="p">]</span>
-</span><span id="Command-72"><a href="#Command-72"><span class="linenos"> 72</span></a>        <span class="p">)</span>
-</span><span id="Command-73"><a href="#Command-73"><span class="linenos"> 73</span></a>
-</span><span id="Command-74"><a href="#Command-74"><span class="linenos"> 74</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command-75"><a href="#Command-75"><span class="linenos"> 75</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
-</span><span id="Command-76"><a href="#Command-76"><span class="linenos"> 76</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="Command-77"><a href="#Command-77"><span class="linenos"> 77</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
-</span><span id="Command-78"><a href="#Command-78"><span class="linenos"> 78</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
-</span><span id="Command-79"><a href="#Command-79"><span class="linenos"> 79</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
-</span><span id="Command-80"><a href="#Command-80"><span class="linenos"> 80</span></a>        <span class="p">)</span>
-</span><span id="Command-81"><a href="#Command-81"><span class="linenos"> 81</span></a>
-</span><span id="Command-82"><a href="#Command-82"><span class="linenos"> 82</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command-83"><a href="#Command-83"><span class="linenos"> 83</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
-</span><span id="Command-84"><a href="#Command-84"><span class="linenos"> 84</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="Command-85"><a href="#Command-85"><span class="linenos"> 85</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
-</span><span id="Command-86"><a href="#Command-86"><span class="linenos"> 86</span></a>        <span class="p">)</span>
-</span><span id="Command-87"><a href="#Command-87"><span class="linenos"> 87</span></a>
-</span><span id="Command-88"><a href="#Command-88"><span class="linenos"> 88</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command-89"><a href="#Command-89"><span class="linenos"> 89</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
-</span><span id="Command-90"><a href="#Command-90"><span class="linenos"> 90</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-</span><span id="Command-91"><a href="#Command-91"><span class="linenos"> 91</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
-</span><span id="Command-92"><a href="#Command-92"><span class="linenos"> 92</span></a>        <span class="p">)</span>
-</span><span id="Command-93"><a href="#Command-93"><span class="linenos"> 93</span></a>
-</span><span id="Command-94"><a href="#Command-94"><span class="linenos"> 94</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-</span><span id="Command-95"><a href="#Command-95"><span class="linenos"> 95</span></a>
-</span><span id="Command-96"><a href="#Command-96"><span class="linenos"> 96</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
-</span><span id="Command-97"><a href="#Command-97"><span class="linenos"> 97</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
-</span><span id="Command-98"><a href="#Command-98"><span class="linenos"> 98</span></a>
-</span><span id="Command-99"><a href="#Command-99"><span class="linenos"> 99</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
-</span><span id="Command-100"><a href="#Command-100"><span class="linenos">100</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
-</span><span id="Command-101"><a href="#Command-101"><span class="linenos">101</span></a>
-</span><span id="Command-102"><a href="#Command-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
-</span><span id="Command-103"><a href="#Command-103"><span class="linenos">103</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
-</span><span id="Command-104"><a href="#Command-104"><span class="linenos">104</span></a>
-</span><span id="Command-105"><a href="#Command-105"><span class="linenos">105</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
-</span><span id="Command-106"><a href="#Command-106"><span class="linenos">106</span></a>
-</span><span id="Command-107"><a href="#Command-107"><span class="linenos">107</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
-</span><span id="Command-108"><a href="#Command-108"><span class="linenos">108</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
-</span><span id="Command-109"><a href="#Command-109"><span class="linenos">109</span></a>
-</span><span id="Command-110"><a href="#Command-110"><span class="linenos">110</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
-</span><span id="Command-111"><a href="#Command-111"><span class="linenos">111</span></a>            <span class="k">try</span><span class="p">:</span>
-</span><span id="Command-112"><a href="#Command-112"><span class="linenos">112</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
-</span><span id="Command-113"><a href="#Command-113"><span class="linenos">113</span></a>            <span class="c1">## more precise exception handling would be good here</span>
-</span><span id="Command-114"><a href="#Command-114"><span class="linenos">114</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="Command-115"><a href="#Command-115"><span class="linenos">115</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="Command-116"><a href="#Command-116"><span class="linenos">116</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
-</span><span id="Command-117"><a href="#Command-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="Command-118"><a href="#Command-118"><span class="linenos">118</span></a>
-</span><span id="Command-119"><a href="#Command-119"><span class="linenos">119</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
-</span><span id="Command-120"><a href="#Command-120"><span class="linenos">120</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-</span><span id="Command-121"><a href="#Command-121"><span class="linenos">121</span></a>
-</span><span id="Command-122"><a href="#Command-122"><span class="linenos">122</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="Command-123"><a href="#Command-123"><span class="linenos">123</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="Command-124"><a href="#Command-124"><span class="linenos">124</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="Command-125"><a href="#Command-125"><span class="linenos">125</span></a>
-</span><span id="Command-126"><a href="#Command-126"><span class="linenos">126</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Command-127"><a href="#Command-127"><span class="linenos">127</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
-</span><span id="Command-128"><a href="#Command-128"><span class="linenos">128</span></a>            <span class="n">exit</span><span class="p">()</span>
+</span><span id="Command-43"><a href="#Command-43"><span class="linenos"> 43</span></a><span class="sd">    - `--overwrite` Use with `register` to overwrite an existing extension with the provided source definition.</span>
+</span><span id="Command-44"><a href="#Command-44"><span class="linenos"> 44</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Command-45"><a href="#Command-45"><span class="linenos"> 45</span></a>
+</span><span id="Command-46"><a href="#Command-46"><span class="linenos"> 46</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Command-47"><a href="#Command-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
+</span><span id="Command-48"><a href="#Command-48"><span class="linenos"> 48</span></a>
+</span><span id="Command-49"><a href="#Command-49"><span class="linenos"> 49</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+</span><span id="Command-50"><a href="#Command-50"><span class="linenos"> 50</span></a>
+</span><span id="Command-51"><a href="#Command-51"><span class="linenos"> 51</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command-52"><a href="#Command-52"><span class="linenos"> 52</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
+</span><span id="Command-53"><a href="#Command-53"><span class="linenos"> 53</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="Command-54"><a href="#Command-54"><span class="linenos"> 54</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
+</span><span id="Command-55"><a href="#Command-55"><span class="linenos"> 55</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
+</span><span id="Command-56"><a href="#Command-56"><span class="linenos"> 56</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
+</span><span id="Command-57"><a href="#Command-57"><span class="linenos"> 57</span></a>            <span class="p">]</span>
+</span><span id="Command-58"><a href="#Command-58"><span class="linenos"> 58</span></a>        <span class="p">)</span>
+</span><span id="Command-59"><a href="#Command-59"><span class="linenos"> 59</span></a>
+</span><span id="Command-60"><a href="#Command-60"><span class="linenos"> 60</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command-61"><a href="#Command-61"><span class="linenos"> 61</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
+</span><span id="Command-62"><a href="#Command-62"><span class="linenos"> 62</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="Command-63"><a href="#Command-63"><span class="linenos"> 63</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
+</span><span id="Command-64"><a href="#Command-64"><span class="linenos"> 64</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
+</span><span id="Command-65"><a href="#Command-65"><span class="linenos"> 65</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+</span><span id="Command-66"><a href="#Command-66"><span class="linenos"> 66</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
+</span><span id="Command-67"><a href="#Command-67"><span class="linenos"> 67</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
+</span><span id="Command-68"><a href="#Command-68"><span class="linenos"> 68</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
+</span><span id="Command-69"><a href="#Command-69"><span class="linenos"> 69</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
+</span><span id="Command-70"><a href="#Command-70"><span class="linenos"> 70</span></a>            <span class="p">]</span>
+</span><span id="Command-71"><a href="#Command-71"><span class="linenos"> 71</span></a>        <span class="p">)</span>
+</span><span id="Command-72"><a href="#Command-72"><span class="linenos"> 72</span></a>
+</span><span id="Command-73"><a href="#Command-73"><span class="linenos"> 73</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command-74"><a href="#Command-74"><span class="linenos"> 74</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
+</span><span id="Command-75"><a href="#Command-75"><span class="linenos"> 75</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="Command-76"><a href="#Command-76"><span class="linenos"> 76</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
+</span><span id="Command-77"><a href="#Command-77"><span class="linenos"> 77</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
+</span><span id="Command-78"><a href="#Command-78"><span class="linenos"> 78</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
+</span><span id="Command-79"><a href="#Command-79"><span class="linenos"> 79</span></a>        <span class="p">)</span>
+</span><span id="Command-80"><a href="#Command-80"><span class="linenos"> 80</span></a>
+</span><span id="Command-81"><a href="#Command-81"><span class="linenos"> 81</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command-82"><a href="#Command-82"><span class="linenos"> 82</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
+</span><span id="Command-83"><a href="#Command-83"><span class="linenos"> 83</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="Command-84"><a href="#Command-84"><span class="linenos"> 84</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
+</span><span id="Command-85"><a href="#Command-85"><span class="linenos"> 85</span></a>        <span class="p">)</span>
+</span><span id="Command-86"><a href="#Command-86"><span class="linenos"> 86</span></a>
+</span><span id="Command-87"><a href="#Command-87"><span class="linenos"> 87</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command-88"><a href="#Command-88"><span class="linenos"> 88</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
+</span><span id="Command-89"><a href="#Command-89"><span class="linenos"> 89</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+</span><span id="Command-90"><a href="#Command-90"><span class="linenos"> 90</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
+</span><span id="Command-91"><a href="#Command-91"><span class="linenos"> 91</span></a>        <span class="p">)</span>
+</span><span id="Command-92"><a href="#Command-92"><span class="linenos"> 92</span></a>
+</span><span id="Command-93"><a href="#Command-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+</span><span id="Command-94"><a href="#Command-94"><span class="linenos"> 94</span></a>
+</span><span id="Command-95"><a href="#Command-95"><span class="linenos"> 95</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
+</span><span id="Command-96"><a href="#Command-96"><span class="linenos"> 96</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
+</span><span id="Command-97"><a href="#Command-97"><span class="linenos"> 97</span></a>
+</span><span id="Command-98"><a href="#Command-98"><span class="linenos"> 98</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
+</span><span id="Command-99"><a href="#Command-99"><span class="linenos"> 99</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</span><span id="Command-100"><a href="#Command-100"><span class="linenos">100</span></a>
+</span><span id="Command-101"><a href="#Command-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+</span><span id="Command-102"><a href="#Command-102"><span class="linenos">102</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
+</span><span id="Command-103"><a href="#Command-103"><span class="linenos">103</span></a>
+</span><span id="Command-104"><a href="#Command-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
+</span><span id="Command-105"><a href="#Command-105"><span class="linenos">105</span></a>
+</span><span id="Command-106"><a href="#Command-106"><span class="linenos">106</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
+</span><span id="Command-107"><a href="#Command-107"><span class="linenos">107</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+</span><span id="Command-108"><a href="#Command-108"><span class="linenos">108</span></a>
+</span><span id="Command-109"><a href="#Command-109"><span class="linenos">109</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
+</span><span id="Command-110"><a href="#Command-110"><span class="linenos">110</span></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="Command-111"><a href="#Command-111"><span class="linenos">111</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
+</span><span id="Command-112"><a href="#Command-112"><span class="linenos">112</span></a>            <span class="c1">## more precise exception handling would be good here</span>
+</span><span id="Command-113"><a href="#Command-113"><span class="linenos">113</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="Command-114"><a href="#Command-114"><span class="linenos">114</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="Command-115"><a href="#Command-115"><span class="linenos">115</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
+</span><span id="Command-116"><a href="#Command-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="Command-117"><a href="#Command-117"><span class="linenos">117</span></a>
+</span><span id="Command-118"><a href="#Command-118"><span class="linenos">118</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
+</span><span id="Command-119"><a href="#Command-119"><span class="linenos">119</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+</span><span id="Command-120"><a href="#Command-120"><span class="linenos">120</span></a>
+</span><span id="Command-121"><a href="#Command-121"><span class="linenos">121</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="Command-122"><a href="#Command-122"><span class="linenos">122</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="Command-123"><a href="#Command-123"><span class="linenos">123</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="Command-124"><a href="#Command-124"><span class="linenos">124</span></a>
+</span><span id="Command-125"><a href="#Command-125"><span class="linenos">125</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Command-126"><a href="#Command-126"><span class="linenos">126</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
+</span><span id="Command-127"><a href="#Command-127"><span class="linenos">127</span></a>            <span class="n">exit</span><span class="p">()</span>
+</span><span id="Command-128"><a href="#Command-128"><span class="linenos">128</span></a>
 </span><span id="Command-129"><a href="#Command-129"><span class="linenos">129</span></a>
-</span><span id="Command-130"><a href="#Command-130"><span class="linenos">130</span></a>
-</span><span id="Command-131"><a href="#Command-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
-</span><span id="Command-132"><a href="#Command-132"><span class="linenos">132</span></a>
-</span><span id="Command-133"><a href="#Command-133"><span class="linenos">133</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
-</span><span id="Command-134"><a href="#Command-134"><span class="linenos">134</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
-</span><span id="Command-135"><a href="#Command-135"><span class="linenos">135</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
-</span><span id="Command-136"><a href="#Command-136"><span class="linenos">136</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
-</span><span id="Command-137"><a href="#Command-137"><span class="linenos">137</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
-</span><span id="Command-138"><a href="#Command-138"><span class="linenos">138</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
-</span><span id="Command-139"><a href="#Command-139"><span class="linenos">139</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Command-140"><a href="#Command-140"><span class="linenos">140</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+</span><span id="Command-130"><a href="#Command-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
+</span><span id="Command-131"><a href="#Command-131"><span class="linenos">131</span></a>
+</span><span id="Command-132"><a href="#Command-132"><span class="linenos">132</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
+</span><span id="Command-133"><a href="#Command-133"><span class="linenos">133</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
+</span><span id="Command-134"><a href="#Command-134"><span class="linenos">134</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
+</span><span id="Command-135"><a href="#Command-135"><span class="linenos">135</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
+</span><span id="Command-136"><a href="#Command-136"><span class="linenos">136</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
+</span><span id="Command-137"><a href="#Command-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
+</span><span id="Command-138"><a href="#Command-138"><span class="linenos">138</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Command-139"><a href="#Command-139"><span class="linenos">139</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+</span><span id="Command-140"><a href="#Command-140"><span class="linenos">140</span></a>            <span class="n">exit</span><span class="p">()</span>
 </span><span id="Command-141"><a href="#Command-141"><span class="linenos">141</span></a>
 </span><span id="Command-142"><a href="#Command-142"><span class="linenos">142</span></a>    <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 </span><span id="Command-143"><a href="#Command-143"><span class="linenos">143</span></a>        <span class="sd">&quot;&quot;&quot;</span>
@@ -684,8 +684,8 @@
 
 <ul>
 <li><code>-s/--source</code> Use with <code><a href="#Command.register">register</a></code> to provide a JSON or .py file when registering an extension. </li>
-<li><p><code>-n/--name</code> Use with <code><a href="#Command.unregister">unregister</a></code> for the name of the extension to remove.</p></li>
-<li><p><code>--overwrite</code> Use with <code><a href="#Command.register">register</a></code> to overwrite an existing extension with the provided source definition.</p></li>
+<li><code>-n/--name</code> Use with <code><a href="#Command.unregister">unregister</a></code> for the name of the extension to remove.</li>
+<li><code>--overwrite</code> Use with <code><a href="#Command.register">register</a></code> to overwrite an existing extension with the provided source definition.</li>
 </ul>
 </div>
 
@@ -700,8 +700,8 @@
 
     </div>
     <a class="headerlink" href="#Command.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.__init__-47"><a href="#Command.__init__-47"><span class="linenos">47</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="Command.__init__-48"><a href="#Command.__init__-48"><span class="linenos">48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.__init__-46"><a href="#Command.__init__-46"><span class="linenos">46</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Command.__init__-47"><a href="#Command.__init__-47"><span class="linenos">47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
 </span></pre></div>
 
 
@@ -719,49 +719,49 @@
 
     </div>
     <a class="headerlink" href="#Command.add_arguments"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.add_arguments-50"><a href="#Command.add_arguments-50"><span class="linenos">50</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
-</span><span id="Command.add_arguments-51"><a href="#Command.add_arguments-51"><span class="linenos">51</span></a>
-</span><span id="Command.add_arguments-52"><a href="#Command.add_arguments-52"><span class="linenos">52</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command.add_arguments-53"><a href="#Command.add_arguments-53"><span class="linenos">53</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-54"><a href="#Command.add_arguments-54"><span class="linenos">54</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Command.add_arguments-55"><a href="#Command.add_arguments-55"><span class="linenos">55</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-56"><a href="#Command.add_arguments-56"><span class="linenos">56</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-57"><a href="#Command.add_arguments-57"><span class="linenos">57</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-58"><a href="#Command.add_arguments-58"><span class="linenos">58</span></a>            <span class="p">]</span>
-</span><span id="Command.add_arguments-59"><a href="#Command.add_arguments-59"><span class="linenos">59</span></a>        <span class="p">)</span>
-</span><span id="Command.add_arguments-60"><a href="#Command.add_arguments-60"><span class="linenos">60</span></a>
-</span><span id="Command.add_arguments-61"><a href="#Command.add_arguments-61"><span class="linenos">61</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command.add_arguments-62"><a href="#Command.add_arguments-62"><span class="linenos">62</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-63"><a href="#Command.add_arguments-63"><span class="linenos">63</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-</span><span id="Command.add_arguments-64"><a href="#Command.add_arguments-64"><span class="linenos">64</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-65"><a href="#Command.add_arguments-65"><span class="linenos">65</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-66"><a href="#Command.add_arguments-66"><span class="linenos">66</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-67"><a href="#Command.add_arguments-67"><span class="linenos">67</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-68"><a href="#Command.add_arguments-68"><span class="linenos">68</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-69"><a href="#Command.add_arguments-69"><span class="linenos">69</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-70"><a href="#Command.add_arguments-70"><span class="linenos">70</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-71"><a href="#Command.add_arguments-71"><span class="linenos">71</span></a>            <span class="p">]</span>
-</span><span id="Command.add_arguments-72"><a href="#Command.add_arguments-72"><span class="linenos">72</span></a>        <span class="p">)</span>
-</span><span id="Command.add_arguments-73"><a href="#Command.add_arguments-73"><span class="linenos">73</span></a>
-</span><span id="Command.add_arguments-74"><a href="#Command.add_arguments-74"><span class="linenos">74</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command.add_arguments-75"><a href="#Command.add_arguments-75"><span class="linenos">75</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-76"><a href="#Command.add_arguments-76"><span class="linenos">76</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-77"><a href="#Command.add_arguments-77"><span class="linenos">77</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
-</span><span id="Command.add_arguments-78"><a href="#Command.add_arguments-78"><span class="linenos">78</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
-</span><span id="Command.add_arguments-79"><a href="#Command.add_arguments-79"><span class="linenos">79</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-80"><a href="#Command.add_arguments-80"><span class="linenos">80</span></a>        <span class="p">)</span>
-</span><span id="Command.add_arguments-81"><a href="#Command.add_arguments-81"><span class="linenos">81</span></a>
-</span><span id="Command.add_arguments-82"><a href="#Command.add_arguments-82"><span class="linenos">82</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command.add_arguments-83"><a href="#Command.add_arguments-83"><span class="linenos">83</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-84"><a href="#Command.add_arguments-84"><span class="linenos">84</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-85"><a href="#Command.add_arguments-85"><span class="linenos">85</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
-</span><span id="Command.add_arguments-86"><a href="#Command.add_arguments-86"><span class="linenos">86</span></a>        <span class="p">)</span>
-</span><span id="Command.add_arguments-87"><a href="#Command.add_arguments-87"><span class="linenos">87</span></a>
-</span><span id="Command.add_arguments-88"><a href="#Command.add_arguments-88"><span class="linenos">88</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-</span><span id="Command.add_arguments-89"><a href="#Command.add_arguments-89"><span class="linenos">89</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-90"><a href="#Command.add_arguments-90"><span class="linenos">90</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-91"><a href="#Command.add_arguments-91"><span class="linenos">91</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
-</span><span id="Command.add_arguments-92"><a href="#Command.add_arguments-92"><span class="linenos">92</span></a>        <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.add_arguments-49"><a href="#Command.add_arguments-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+</span><span id="Command.add_arguments-50"><a href="#Command.add_arguments-50"><span class="linenos">50</span></a>
+</span><span id="Command.add_arguments-51"><a href="#Command.add_arguments-51"><span class="linenos">51</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command.add_arguments-52"><a href="#Command.add_arguments-52"><span class="linenos">52</span></a>            <span class="s2">&quot;operation&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-53"><a href="#Command.add_arguments-53"><span class="linenos">53</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="Command.add_arguments-54"><a href="#Command.add_arguments-54"><span class="linenos">54</span></a>                <span class="s2">&quot;list&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-55"><a href="#Command.add_arguments-55"><span class="linenos">55</span></a>                <span class="s2">&quot;register&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-56"><a href="#Command.add_arguments-56"><span class="linenos">56</span></a>                <span class="s2">&quot;unregister&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-57"><a href="#Command.add_arguments-57"><span class="linenos">57</span></a>            <span class="p">]</span>
+</span><span id="Command.add_arguments-58"><a href="#Command.add_arguments-58"><span class="linenos">58</span></a>        <span class="p">)</span>
+</span><span id="Command.add_arguments-59"><a href="#Command.add_arguments-59"><span class="linenos">59</span></a>
+</span><span id="Command.add_arguments-60"><a href="#Command.add_arguments-60"><span class="linenos">60</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command.add_arguments-61"><a href="#Command.add_arguments-61"><span class="linenos">61</span></a>            <span class="s2">&quot;extension_type&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-62"><a href="#Command.add_arguments-62"><span class="linenos">62</span></a>            <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+</span><span id="Command.add_arguments-63"><a href="#Command.add_arguments-63"><span class="linenos">63</span></a>                <span class="s2">&quot;card-component&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-64"><a href="#Command.add_arguments-64"><span class="linenos">64</span></a>                <span class="s2">&quot;datatype&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-65"><a href="#Command.add_arguments-65"><span class="linenos">65</span></a>                <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-66"><a href="#Command.add_arguments-66"><span class="linenos">66</span></a>                <span class="s2">&quot;plugins&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-67"><a href="#Command.add_arguments-67"><span class="linenos">67</span></a>                <span class="s2">&quot;report&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-68"><a href="#Command.add_arguments-68"><span class="linenos">68</span></a>                <span class="s2">&quot;search-filter&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-69"><a href="#Command.add_arguments-69"><span class="linenos">69</span></a>                <span class="s2">&quot;widget&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-70"><a href="#Command.add_arguments-70"><span class="linenos">70</span></a>            <span class="p">]</span>
+</span><span id="Command.add_arguments-71"><a href="#Command.add_arguments-71"><span class="linenos">71</span></a>        <span class="p">)</span>
+</span><span id="Command.add_arguments-72"><a href="#Command.add_arguments-72"><span class="linenos">72</span></a>
+</span><span id="Command.add_arguments-73"><a href="#Command.add_arguments-73"><span class="linenos">73</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command.add_arguments-74"><a href="#Command.add_arguments-74"><span class="linenos">74</span></a>            <span class="s2">&quot;-s&quot;</span><span class="p">,</span> <span class="s2">&quot;--source&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-75"><a href="#Command.add_arguments-75"><span class="linenos">75</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-76"><a href="#Command.add_arguments-76"><span class="linenos">76</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Path to the source file for the extension to register. &quot;</span>\
+</span><span id="Command.add_arguments-77"><a href="#Command.add_arguments-77"><span class="linenos">77</span></a>                <span class="s2">&quot;In many cases this will be a .json file, but with functions, search-filters, etc. &quot;</span>\
+</span><span id="Command.add_arguments-78"><a href="#Command.add_arguments-78"><span class="linenos">78</span></a>                <span class="s2">&quot;, it will be a .py file.&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-79"><a href="#Command.add_arguments-79"><span class="linenos">79</span></a>        <span class="p">)</span>
+</span><span id="Command.add_arguments-80"><a href="#Command.add_arguments-80"><span class="linenos">80</span></a>
+</span><span id="Command.add_arguments-81"><a href="#Command.add_arguments-81"><span class="linenos">81</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command.add_arguments-82"><a href="#Command.add_arguments-82"><span class="linenos">82</span></a>            <span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-83"><a href="#Command.add_arguments-83"><span class="linenos">83</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-84"><a href="#Command.add_arguments-84"><span class="linenos">84</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the extension to unregister.&quot;</span>
+</span><span id="Command.add_arguments-85"><a href="#Command.add_arguments-85"><span class="linenos">85</span></a>        <span class="p">)</span>
+</span><span id="Command.add_arguments-86"><a href="#Command.add_arguments-86"><span class="linenos">86</span></a>
+</span><span id="Command.add_arguments-87"><a href="#Command.add_arguments-87"><span class="linenos">87</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span><span id="Command.add_arguments-88"><a href="#Command.add_arguments-88"><span class="linenos">88</span></a>            <span class="s2">&quot;--overwrite&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-89"><a href="#Command.add_arguments-89"><span class="linenos">89</span></a>            <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-90"><a href="#Command.add_arguments-90"><span class="linenos">90</span></a>            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Overwrite existing extension that matches the input extension name.&quot;</span><span class="p">,</span>
+</span><span id="Command.add_arguments-91"><a href="#Command.add_arguments-91"><span class="linenos">91</span></a>        <span class="p">)</span>
 </span></pre></div>
 
 
@@ -781,16 +781,16 @@
 
     </div>
     <a class="headerlink" href="#Command.handle"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.handle-94"><a href="#Command.handle-94"><span class="linenos"> 94</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-</span><span id="Command.handle-95"><a href="#Command.handle-95"><span class="linenos"> 95</span></a>
-</span><span id="Command.handle-96"><a href="#Command.handle-96"><span class="linenos"> 96</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
-</span><span id="Command.handle-97"><a href="#Command.handle-97"><span class="linenos"> 97</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
-</span><span id="Command.handle-98"><a href="#Command.handle-98"><span class="linenos"> 98</span></a>
-</span><span id="Command.handle-99"><a href="#Command.handle-99"><span class="linenos"> 99</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
-</span><span id="Command.handle-100"><a href="#Command.handle-100"><span class="linenos">100</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
-</span><span id="Command.handle-101"><a href="#Command.handle-101"><span class="linenos">101</span></a>
-</span><span id="Command.handle-102"><a href="#Command.handle-102"><span class="linenos">102</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
-</span><span id="Command.handle-103"><a href="#Command.handle-103"><span class="linenos">103</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.handle-93"><a href="#Command.handle-93"><span class="linenos"> 93</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+</span><span id="Command.handle-94"><a href="#Command.handle-94"><span class="linenos"> 94</span></a>
+</span><span id="Command.handle-95"><a href="#Command.handle-95"><span class="linenos"> 95</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;register&quot;</span><span class="p">:</span>
+</span><span id="Command.handle-96"><a href="#Command.handle-96"><span class="linenos"> 96</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">],</span> <span class="n">overwrite</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;overwrite&#39;</span><span class="p">])</span>
+</span><span id="Command.handle-97"><a href="#Command.handle-97"><span class="linenos"> 97</span></a>
+</span><span id="Command.handle-98"><a href="#Command.handle-98"><span class="linenos"> 98</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;unregister&quot;</span><span class="p">:</span>
+</span><span id="Command.handle-99"><a href="#Command.handle-99"><span class="linenos"> 99</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</span><span id="Command.handle-100"><a href="#Command.handle-100"><span class="linenos">100</span></a>
+</span><span id="Command.handle-101"><a href="#Command.handle-101"><span class="linenos">101</span></a>        <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;operation&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+</span><span id="Command.handle-102"><a href="#Command.handle-102"><span class="linenos">102</span></a>            <span class="bp">self</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">])</span>
 </span></pre></div>
 
 
@@ -811,30 +811,30 @@ this method.</p>
 
     </div>
     <a class="headerlink" href="#Command.get_source_details"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.get_source_details-105"><a href="#Command.get_source_details-105"><span class="linenos">105</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
-</span><span id="Command.get_source_details-106"><a href="#Command.get_source_details-106"><span class="linenos">106</span></a>
-</span><span id="Command.get_source_details-107"><a href="#Command.get_source_details-107"><span class="linenos">107</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
-</span><span id="Command.get_source_details-108"><a href="#Command.get_source_details-108"><span class="linenos">108</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
-</span><span id="Command.get_source_details-109"><a href="#Command.get_source_details-109"><span class="linenos">109</span></a>
-</span><span id="Command.get_source_details-110"><a href="#Command.get_source_details-110"><span class="linenos">110</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
-</span><span id="Command.get_source_details-111"><a href="#Command.get_source_details-111"><span class="linenos">111</span></a>            <span class="k">try</span><span class="p">:</span>
-</span><span id="Command.get_source_details-112"><a href="#Command.get_source_details-112"><span class="linenos">112</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
-</span><span id="Command.get_source_details-113"><a href="#Command.get_source_details-113"><span class="linenos">113</span></a>            <span class="c1">## more precise exception handling would be good here</span>
-</span><span id="Command.get_source_details-114"><a href="#Command.get_source_details-114"><span class="linenos">114</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="Command.get_source_details-115"><a href="#Command.get_source_details-115"><span class="linenos">115</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</span><span id="Command.get_source_details-116"><a href="#Command.get_source_details-116"><span class="linenos">116</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
-</span><span id="Command.get_source_details-117"><a href="#Command.get_source_details-117"><span class="linenos">117</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="Command.get_source_details-118"><a href="#Command.get_source_details-118"><span class="linenos">118</span></a>
-</span><span id="Command.get_source_details-119"><a href="#Command.get_source_details-119"><span class="linenos">119</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
-</span><span id="Command.get_source_details-120"><a href="#Command.get_source_details-120"><span class="linenos">120</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
-</span><span id="Command.get_source_details-121"><a href="#Command.get_source_details-121"><span class="linenos">121</span></a>
-</span><span id="Command.get_source_details-122"><a href="#Command.get_source_details-122"><span class="linenos">122</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-</span><span id="Command.get_source_details-123"><a href="#Command.get_source_details-123"><span class="linenos">123</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-</span><span id="Command.get_source_details-124"><a href="#Command.get_source_details-124"><span class="linenos">124</span></a>            <span class="k">return</span> <span class="n">details</span>
-</span><span id="Command.get_source_details-125"><a href="#Command.get_source_details-125"><span class="linenos">125</span></a>
-</span><span id="Command.get_source_details-126"><a href="#Command.get_source_details-126"><span class="linenos">126</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Command.get_source_details-127"><a href="#Command.get_source_details-127"><span class="linenos">127</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
-</span><span id="Command.get_source_details-128"><a href="#Command.get_source_details-128"><span class="linenos">128</span></a>            <span class="n">exit</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.get_source_details-104"><a href="#Command.get_source_details-104"><span class="linenos">104</span></a>    <span class="k">def</span> <span class="nf">get_source_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_path</span><span class="p">):</span>
+</span><span id="Command.get_source_details-105"><a href="#Command.get_source_details-105"><span class="linenos">105</span></a>
+</span><span id="Command.get_source_details-106"><a href="#Command.get_source_details-106"><span class="linenos">106</span></a>        <span class="c1">## load details from a python module (functions, datatypes)</span>
+</span><span id="Command.get_source_details-107"><a href="#Command.get_source_details-107"><span class="linenos">107</span></a>        <span class="k">if</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.py&quot;</span><span class="p">):</span>
+</span><span id="Command.get_source_details-108"><a href="#Command.get_source_details-108"><span class="linenos">108</span></a>
+</span><span id="Command.get_source_details-109"><a href="#Command.get_source_details-109"><span class="linenos">109</span></a>            <span class="kn">import</span> <span class="nn">imp</span>
+</span><span id="Command.get_source_details-110"><a href="#Command.get_source_details-110"><span class="linenos">110</span></a>            <span class="k">try</span><span class="p">:</span>
+</span><span id="Command.get_source_details-111"><a href="#Command.get_source_details-111"><span class="linenos">111</span></a>                <span class="n">source</span> <span class="o">=</span> <span class="n">imp</span><span class="o">.</span><span class="n">load_source</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">source_path</span><span class="p">)</span>
+</span><span id="Command.get_source_details-112"><a href="#Command.get_source_details-112"><span class="linenos">112</span></a>            <span class="c1">## more precise exception handling would be good here</span>
+</span><span id="Command.get_source_details-113"><a href="#Command.get_source_details-113"><span class="linenos">113</span></a>            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="Command.get_source_details-114"><a href="#Command.get_source_details-114"><span class="linenos">114</span></a>                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span><span id="Command.get_source_details-115"><a href="#Command.get_source_details-115"><span class="linenos">115</span></a>            <span class="n">details</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">details</span>
+</span><span id="Command.get_source_details-116"><a href="#Command.get_source_details-116"><span class="linenos">116</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="Command.get_source_details-117"><a href="#Command.get_source_details-117"><span class="linenos">117</span></a>
+</span><span id="Command.get_source_details-118"><a href="#Command.get_source_details-118"><span class="linenos">118</span></a>        <span class="c1">## load details form a json file (widgets, card_components, etc.)</span>
+</span><span id="Command.get_source_details-119"><a href="#Command.get_source_details-119"><span class="linenos">119</span></a>        <span class="k">elif</span> <span class="n">source_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+</span><span id="Command.get_source_details-120"><a href="#Command.get_source_details-120"><span class="linenos">120</span></a>
+</span><span id="Command.get_source_details-121"><a href="#Command.get_source_details-121"><span class="linenos">121</span></a>            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span id="Command.get_source_details-122"><a href="#Command.get_source_details-122"><span class="linenos">122</span></a>                <span class="n">details</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</span><span id="Command.get_source_details-123"><a href="#Command.get_source_details-123"><span class="linenos">123</span></a>            <span class="k">return</span> <span class="n">details</span>
+</span><span id="Command.get_source_details-124"><a href="#Command.get_source_details-124"><span class="linenos">124</span></a>
+</span><span id="Command.get_source_details-125"><a href="#Command.get_source_details-125"><span class="linenos">125</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Command.get_source_details-126"><a href="#Command.get_source_details-126"><span class="linenos">126</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;invalid source path&quot;</span><span class="p">)</span>
+</span><span id="Command.get_source_details-127"><a href="#Command.get_source_details-127"><span class="linenos">127</span></a>            <span class="n">exit</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -852,16 +852,17 @@ this method.</p>
 
     </div>
     <a class="headerlink" href="#Command.get_model"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.get_model-131"><a href="#Command.get_model-131"><span class="linenos">131</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
-</span><span id="Command.get_model-132"><a href="#Command.get_model-132"><span class="linenos">132</span></a>
-</span><span id="Command.get_model-133"><a href="#Command.get_model-133"><span class="linenos">133</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
-</span><span id="Command.get_model-134"><a href="#Command.get_model-134"><span class="linenos">134</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
-</span><span id="Command.get_model-135"><a href="#Command.get_model-135"><span class="linenos">135</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
-</span><span id="Command.get_model-136"><a href="#Command.get_model-136"><span class="linenos">136</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
-</span><span id="Command.get_model-137"><a href="#Command.get_model-137"><span class="linenos">137</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
-</span><span id="Command.get_model-138"><a href="#Command.get_model-138"><span class="linenos">138</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
-</span><span id="Command.get_model-139"><a href="#Command.get_model-139"><span class="linenos">139</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="Command.get_model-140"><a href="#Command.get_model-140"><span class="linenos">140</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.get_model-130"><a href="#Command.get_model-130"><span class="linenos">130</span></a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extension_type</span><span class="p">):</span>
+</span><span id="Command.get_model-131"><a href="#Command.get_model-131"><span class="linenos">131</span></a>
+</span><span id="Command.get_model-132"><a href="#Command.get_model-132"><span class="linenos">132</span></a>        <span class="k">if</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;widget&quot;</span><span class="p">:</span>
+</span><span id="Command.get_model-133"><a href="#Command.get_model-133"><span class="linenos">133</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">Widget</span>
+</span><span id="Command.get_model-134"><a href="#Command.get_model-134"><span class="linenos">134</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;datatype&quot;</span><span class="p">:</span>
+</span><span id="Command.get_model-135"><a href="#Command.get_model-135"><span class="linenos">135</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">DDataType</span>
+</span><span id="Command.get_model-136"><a href="#Command.get_model-136"><span class="linenos">136</span></a>        <span class="k">elif</span> <span class="n">extension_type</span> <span class="o">==</span> <span class="s2">&quot;search&quot;</span><span class="p">:</span>
+</span><span id="Command.get_model-137"><a href="#Command.get_model-137"><span class="linenos">137</span></a>            <span class="k">return</span> <span class="n">models</span><span class="o">.</span><span class="n">SearchComponent</span>
+</span><span id="Command.get_model-138"><a href="#Command.get_model-138"><span class="linenos">138</span></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="Command.get_model-139"><a href="#Command.get_model-139"><span class="linenos">139</span></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this extension type not (yet) supported.&quot;</span><span class="p">)</span>
+</span><span id="Command.get_model-140"><a href="#Command.get_model-140"><span class="linenos">140</span></a>            <span class="n">exit</span><span class="p">()</span>
 </span></pre></div>
 
 
