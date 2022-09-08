@@ -61,9 +61,7 @@
                     <h1 class="modulename">
 <a href="./../../arches_dev_tools.html">arches_dev_tools</a><wbr>.<a href="./../management.html">management</a><wbr>.commands    </h1>
 
-                        <div class="docstring"><p>See documentation in each submodule.</p>
-
-<h1 id="commands">Commands</h1>
+                        <div class="docstring"><h1 id="commands">Commands</h1>
 
 <p>The management commands herein are generally designed like:</p>
 
@@ -72,14 +70,21 @@
 
 <p>Where the topic may be <code>maplayer</code> and an operation may be <code>list</code> (list all maplayers).</p>
 
+<p>For help, use</p>
+
+<pre><code>python manage.py [command] --help
+</code></pre>
+
+<p>to learn more about any specific command.</p>
+
+<p>A brief overview of each command is provided below, but for the real details you should head to <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
+
 <blockquote>
   <p><strong>IMPORTANT</strong> - Some of these commands will alter your database content, so it is always a good idea to back up your database before using them.</p>
 </blockquote>
 
-<p>In general, use <code>python manage.py [command] --help</code> to learn more about each management command. Some more explanation follows, or head to <a href="https://legiongis.github.io/arches-dev-tools/arches_dev_tools/management/commands.html">management/commands</a> and browse the submodules documentation.</p>
-
 <blockquote>
-  <p><strong>These are all a work in progress, some will surely fail right now</strong></p>
+  <p><strong>These are all a work in progress, some will surely fail right now</strong> Also be aware that some of the commands will alter database content, though any changes to resources should be preceded with a confirmation prompt.</p>
 </blockquote>
 
 <h2 id="python-managepy-extension"><code>python manage.py extension</code></h2>
