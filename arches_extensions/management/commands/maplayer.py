@@ -36,11 +36,16 @@ class Command(BaseCommand):
 
         if options["operation"] == "add":
             self.add_layer(
-                options["layer_name"], options["mapbox_json_path"], options["layer_icon"], options["is_basemap"],
+                options["layer_name"],
+                options["mapbox_json_path"],
+                options["layer_icon"],
+                options["is_basemap"],
             )
 
         if options["operation"] == "remove":
-            self.remove_layer(options["name"])
+            self.remove_layer(
+                options["name"]
+            )
 
         if options["operation"] == "list":
             self.list()

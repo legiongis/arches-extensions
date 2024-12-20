@@ -3,22 +3,21 @@ import csv
 import logging
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+
 from arches.app.models.resource import Resource
 from arches.app.models.graph import Graph
 from arches.app.search.search_engine_factory import SearchEngineInstance as se
 
+from arches_extensions.utils import ArchesHelpTextFormatter
+
 logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
-    """
-    Checks the current ElasticSearch resource index against the ORM
-    objects and prints a list of missing resources to the logs directory.
+    """Some commands for helper operations with the ElasticSearch indexes.
 
-        python manage.py indexes [operation] [--index-missing]
+    Usage:
 
-    Operations are:
-
-    - `check`
+    python manage.py indexes [operation] [--index-missing]
     """
 
     def __init__(self, *args, **kwargs):
@@ -26,16 +25,21 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
 
+        parser.formatter_class = ArchesHelpTextFormatter
+
         parser.add_argument("operation",
-            choice=[
-                "check"
+            choices=[
+                "check",
             ],
+            help="""OPERATION
+            check: Compare the current ElasticSearch resource index against the ORM objects and prints a list of missing resources to the logs directory
+            """
         )
 
         parser.add_argument("--index-missing",
             action="store_true",
             default=False,
-            help="attempt to index resources that aren't in index."
+            help="Attempt to index resources that are missing from index."
         )
 
     def handle(self, *args, **options):
