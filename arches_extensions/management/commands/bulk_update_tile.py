@@ -1,7 +1,8 @@
 import uuid
+
 from django.core.management.base import BaseCommand, CommandError
-from arches.app.models.models import NodeGroup, Node
-from arches.app.models.graph import Graph
+
+from arches.app.models.models import Node
 from arches.app.models.tile import Tile
 
 class Command(BaseCommand):
@@ -25,8 +26,6 @@ class Command(BaseCommand):
             help='set all node values to empty. can be used to initialize '\
                  'newly created nodes. ERASES ALL EXISTING VALUES.'
         )
-
-
 
     def handle(self, *args, **options):
 

@@ -10,6 +10,17 @@ from django.db.utils import IntegrityError
 class Command(BaseCommand):
     """
     Manage Arches map layers with this command.
+
+    Usage:
+
+        python manage.py maplayer [operation] [-s/--source] [-n/--name]
+    
+    Operations:
+
+        - `add`
+        - `remove`
+        - `list`
+
     """
 
     def __init__(self, *args, **kwargs):

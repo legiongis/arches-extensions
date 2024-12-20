@@ -23,13 +23,11 @@ class ArchesCLIStyles():
 
     **Further notes**
 
-    Reset all colors with s.reset
-    Two subclasses fg for foreground and bg for background.
-    Use as s.subclass.colorname.
-        i.e. s.fg.red or s.bg.green
-    Also, the generic bold, disable, underline, reverse, strikethrough,
-    and invisible work with the main class
-        i.e. s.bold
+    - Reset all colors with `s.reset`
+    - Two subclasses `fg` for foreground and `bg` for background.
+        - Use as `s.<subclass>.<colorname>`, e.g., `s.fg.red` or `s.bg.green`
+    - Also, `bold`, `disable`, `underline`, `reverse`, `strikethrough`,
+    and `invisible` work with the main class, e.g., `s.bold`
     '''
     reset='\033[0m'
     bold='\033[01m'
@@ -98,6 +96,7 @@ class ArchesCLIStyles():
         return f"{self.fg.cyan}{self.bold}{string}{self.reset}"
 
 class ArchesHelpTextFormatter(RawTextHelpFormatter):
+    """Help message formatter that applies optional text styling."""
     def _split_lines(self, text, width):
         ret = []
         for line in text.splitlines():
@@ -105,7 +104,7 @@ class ArchesHelpTextFormatter(RawTextHelpFormatter):
         return ret
 
 def get_graph(name_or_uuid):
-
+    """ Utility function to get a graph by its name or UUID. """
     graph = None
     try:
         uid = uuid.UUID(str(name_or_uuid))

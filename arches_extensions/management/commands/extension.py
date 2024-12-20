@@ -15,11 +15,11 @@ class Command(BaseCommand):
 
     Operations:
 
-        - list
-        - register
-        - unregister
-        - activate
-        - deactivate
+    - `list`
+    - `register`
+    - `unregister`
+    - `activate`
+    - `deactivate`
     
     Use `list` for quick inspection of the database. If you need to supply a `--name` for an operation, use the value that is printed by the `list` operation.
 
@@ -31,21 +31,23 @@ class Command(BaseCommand):
 
     Extension types:
 
-        - card-component
-        - datatype
-        - etl-module
-        - function
-        - plugin --> use this for workflows
-        - report
-        - search-filter
-        - widget
+    - `card-component`
+    - `datatype`
+    - `etl-module`
+    - `function`
+    - `plugin` &rarr; use this for "workflows"
+    - `report`
+    - `search-filter`
+    - `widget`
 
     """
 
     def __init__(self, *args, **kwargs):
+        """ @private """
         self.help = self.__doc__
 
     def add_arguments(self, parser):
+        # """@private"""
         parser.formatter_class = ArchesHelpTextFormatter
         parser.add_argument(
             "operation",

@@ -17,7 +17,12 @@ class Command(BaseCommand):
 
     Usage:
 
-    python manage.py indexes [operation] [--index-missing]
+        python manage.py indexes [operation] [--index-missing]
+    
+    Operations:
+
+        - `check`
+
     """
 
     def __init__(self, *args, **kwargs):

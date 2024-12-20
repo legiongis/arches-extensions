@@ -14,7 +14,7 @@ from arches_extensions.utils import ArchesCLIStyles
 logger = logging.getLogger(__name__)
 
 class ExtensionManager():
-
+    """ A unified manager class for handling all Arches "extensions," like Widgets, DDataType, etc."""
     def __init__(self, extension_type=None):
         self.model_lookup = {
             "card-component": models.Widget,
