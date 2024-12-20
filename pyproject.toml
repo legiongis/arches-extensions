@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools >= 40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arches-extensions"
+description = "Extra tools to aid with Arches development process."
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Adam Cox", email = "adam@legiongis.com"},
+]
+dependencies = [
+    "arches<7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pdoc",
+]
+
+[tool.setuptools]
+packages = [
+    "arches_extensions"
+]

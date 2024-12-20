@@ -24,6 +24,6 @@ class Command(BaseCommand):
         module_path = Path(__file__).parents[2]
         output = Path(Path(__file__).parents[3], "docs")
         r = pdoc.pdoc(
-            module_path,
+            "arches_extensions",
             output_directory=output,
         )

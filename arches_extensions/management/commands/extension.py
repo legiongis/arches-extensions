@@ -33,7 +33,8 @@ class Command(BaseCommand):
     - `search-filter`
     - `widget`
 
-    > For Workflows use `plugin`.
+    .. note::
+        For Workflows use `plugin`.
 
     Other arguments:
 
