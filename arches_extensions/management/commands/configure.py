@@ -50,6 +50,12 @@ class Command(BaseCommand):
             "--prefix",
             help="Optional prefix for the names of the services to be written."
         )
+        parser.add_argument(
+            "--require-rabbitmq",
+            action="store_true",
+            default=False,
+            help="If true, Celery services will require rabbitmq.service",
+        )
 
     def handle(self, *args, **options):
 
@@ -72,17 +78,23 @@ class Command(BaseCommand):
             self.write_celery_services(
                 options["app"],
                 prefix=options["prefix"],
-                log_level=options["log_level"]
+                log_level=options["log_level"],
+                require_rabbitmq=options["require_rabbitmq"],
             )
 
-    def write_celery_services(self, app_name, prefix=None, log_level="DEBUG"):
+    def write_celery_services(self, app_name, prefix=None, log_level="DEBUG", require_rabbitmq=False):
+
+        if require_rabbitmq:
+            requirement_block = "After=rabbitmq-server.service\nRequires=rabbitmq-server.service"
+        else:
+            "After=network.target"
 
         prefix_ = "" if not prefix else f"{prefix}_"
         main_fname = f"{prefix_}celery.service"
         with open(Path(self.dest, main_fname), "w") as o:
             o.write(f"""[Unit]
 Description=Celery Service{f" ({prefix})" if prefix else ""}
-After=network.target
+{requirement_block}
 
 [Service]
 Type=simple
