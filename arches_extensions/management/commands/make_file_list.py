@@ -91,7 +91,7 @@ specific resources.
 
         ## stub out entry for this resource
         output = {
-            "name": resource.displayname,
+            "name": resource.displayname(),
             "resourceid": str(resource.pk),
             "file_data": {}
         }
