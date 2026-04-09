@@ -14,10 +14,12 @@ authors = [
 ]
 dependencies = [
     "arches<7",
+    "setuptools<=80.9.0",
 ]
 
 [project.optional-dependencies]
 dev = [
+    "pydoctor>=23.9.1",
     "pdoc",
 ]
 
@@ -25,3 +27,8 @@ dev = [
 packages = [
     "arches_extensions"
 ]
+
+[tool.pydoctor]
+add-package = ["arches_extensions"]
+docformat = "epytext"
+html-output = "docs2"

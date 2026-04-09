@@ -1,10 +1,5 @@
-import os
-import imp
-import uuid
-import json
 
-from django.core.management.base import BaseCommand, CommandError
-from django.db.utils import IntegrityError
+from django.core.management.base import BaseCommand
 
 from arches.app.models.models import ResourceInstance
 from arches.app.models.graph import Graph
@@ -13,6 +8,8 @@ from arches_extensions.utils import get_graph
 
 class Command(BaseCommand):
     """
+    .. warning::
+        This command is a work-in-progress
     """
 
     def __init__(self, *args, **kwargs):

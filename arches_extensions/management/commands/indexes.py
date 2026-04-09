@@ -1,8 +1,5 @@
-import os
-import csv
 import logging
-from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from arches.app.models.resource import Resource
 from arches.app.models.graph import Graph
@@ -14,6 +11,9 @@ logger = logging.getLogger(__name__)
 
 class Command(BaseCommand):
     """Some commands for helper operations with the ElasticSearch indexes.
+
+    .. warning::
+        This command is a work-in-progress
 
     Usage:
 

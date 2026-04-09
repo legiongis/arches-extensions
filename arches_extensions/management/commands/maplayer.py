@@ -1,15 +1,16 @@
-import os
-import uuid
 import json
-from arches.app.models.models import MapSource, MapLayer
 from django.db import transaction
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db.utils import IntegrityError
 
+from arches.app.models.models import MapSource, MapLayer
 
 class Command(BaseCommand):
     """
     Manage Arches map layers with this command.
+
+    .. warning::
+        This command is a work-in-progress
 
     Usage:
 
@@ -35,7 +36,7 @@ class Command(BaseCommand):
 
         parser.add_argument(
             "-s", "--source",
-            help="Widget json file to be loaded",
+            help="Map Layer JSON file to be loaded",
         )
 
         parser.add_argument(
@@ -79,7 +80,7 @@ class Command(BaseCommand):
                     )
                     try:
                         map_layer.save()
-                    except IntegrityError as e:
+                    except IntegrityError:
                         print("Cannot save layer: {0} already exists".format(layer_name))
 
     def remove_layer(self, layer_name):

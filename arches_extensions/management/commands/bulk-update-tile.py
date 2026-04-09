@@ -9,6 +9,9 @@ from arches.app.models.tile import Tile
 class Command(BaseCommand):
     """
     Facilitates bulk updates to nodes across the database.
+
+    .. warning::
+        This command is a work-in-progress
     """
 
     def __init__(self, *args, **kwargs):

@@ -1,18 +1,14 @@
-import os
 import csv
-import json
 import logging
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 from time import strftime, localtime
 
-from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
-from arches.app.models.models import Node, NodeGroup, File
+from arches.app.models.models import Node, File
 from arches.app.models.resource import Resource
 from arches.app.models.graph import Graph
-from arches.app.search.search_engine_factory import SearchEngineInstance as se
 from arches.app.models.tile import Tile
 
 from arches_extensions.utils import ArchesHelpTextFormatter
@@ -22,6 +18,9 @@ logger = logging.getLogger(__name__)
 class Command(BaseCommand):
     """Generate a list of file names for file-list nodes within the
 specific resources.
+
+    .. warning::
+        This command is a work-in-progress
 
     Usage:
 
@@ -131,7 +130,7 @@ specific resources.
         for f in files:
             file_lookup[str(f.fileid)] = f
             tileid = str(f.tile_id)
-            if not tileid in tile_lookup:
+            if tileid not in tile_lookup:
                 tile_lookup[tileid] = Tile.objects.get(pk=tileid)
         print(f"Tiles with files in them: {len(tile_lookup)}")
 
@@ -147,12 +146,12 @@ specific resources.
         for t, tile in tile_lookup.items():
             resid = str(tile.resourceinstance_id)
             res = res_lookup.get(resid, Resource.objects.get(pk=resid))
-            if not resid in res_lookup:
+            if resid not in res_lookup:
                 res_lookup[resid] = res
             found_ids = []
             for k, v in tile.data.items():
                 node = node_lookup.get(k, Node.objects.get(pk=k))
-                if not k in node_lookup:
+                if k not in node_lookup:
                     node_lookup[k] = node
                 if node.datatype == "file-list":
                     for i in v:

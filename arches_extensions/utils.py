@@ -1,5 +1,6 @@
 import uuid
 import textwrap
+from typing import Union
 from argparse import RawTextHelpFormatter
 
 from django.db.models.functions import Lower
@@ -7,28 +8,30 @@ from django.db.models.functions import Lower
 from arches.app.models.graph import Graph
 
 class ArchesCLIStyles():
-    '''Styles for Arches CLI output. Borrowed heavily from https://stackoverflow.com/a/26445590/3873885.
+    """
+Styles for Arches CLI output. Borrowed heavily from https://stackoverflow.com/a/26445590/3873885.
 
-    Usage:
+Usage::
 
-        s = ArchesCLIStyles()
+    s = ArchesCLIStyles()
 
-    Add arbitrary style within strings:
+Add arbitrary style within strings::
 
-        print(f"{s.fg.red}Red text{s.reset} not red text")
+    print(f"{s.fg.red}Red text{s.reset} not red text")
 
-    Some methods transform text in predetermined ways, like the following format for an optional CLI argument:
+Some methods transform text in predetermined ways, like 
+the following format for an optional CLI argument::
 
-        print(s.opt("--source"))
+    print(s.opt("--source"))
 
-    **Further notes**
+Further notes
 
     - Reset all colors with `s.reset`
     - Two subclasses `fg` for foreground and `bg` for background.
         - Use as `s.<subclass>.<colorname>`, e.g., `s.fg.red` or `s.bg.green`
     - Also, `bold`, `disable`, `underline`, `reverse`, `strikethrough`,
     and `invisible` work with the main class, e.g., `s.bold`
-    '''
+"""
     reset='\033[0m'
     bold='\033[01m'
     disable='\033[02m'
@@ -103,7 +106,7 @@ class ArchesHelpTextFormatter(RawTextHelpFormatter):
             ret += [i for i in textwrap.wrap(line.strip(), width)]
         return ret
 
-def get_graph(name_or_uuid):
+def get_graph(name_or_uuid: Union[str, uuid.UUID]) -> Graph:
     """ Utility function to get a graph by its name or UUID. """
     graph = None
     try:
@@ -125,7 +128,7 @@ def get_graph(name_or_uuid):
 
     return graph
 
-def user_confirms(message="Continue?", default=True):
+def user_confirms(message:str="Continue?", default:bool=True):
 
     message = f"{message} Y/n " if default is True else f"{message} y/N "
     response = input(message).lower()
