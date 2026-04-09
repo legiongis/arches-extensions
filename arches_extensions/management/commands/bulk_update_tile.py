@@ -1,7 +1,8 @@
 import uuid
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
+from arches_extensions.utils import user_confirms
 from arches.app.models.models import Node
 from arches.app.models.tile import Tile
 
@@ -48,7 +49,7 @@ class Command(BaseCommand):
                 print(f"{node.name} - {node.pk} - {node.graph.name}")
             print("\nAll of these nodes will be updated. To choose a specific "\
                   "one, rerun this command using the node id instead of name.")
-            if not input("\nproceed? y/N ").lower().startswith("y"):
+            if not user_confirms(message="proceed?", default=False):
                 print("cancelled")
                 exit()
 

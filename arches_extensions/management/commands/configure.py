@@ -1,11 +1,13 @@
 import sys
 from pathlib import Path
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
-
+from arches_extensions.utils import user_confirms
 class Command(BaseCommand):
     """
-    Configure service files used for Arches.
+    Configure service files used for Arches. Using this command will derive
+    information about your app and python environment and write these directly
+    into the files.
 
     Usage:
 
@@ -28,7 +30,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             "-a", "--app",
-            help="Optional path for output. Defaults to .services/ in root directory."
+            help="Name of the Celery app your project creates (see celery.py)."
         )
         parser.add_argument(
             "-d", "--destination",
@@ -59,7 +61,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        self.dest = Path(options["destination"])
+        self.dest = Path(options["destination"]).resolve()
         self.dest.mkdir(exist_ok=True)
 
         self.log_dir = Path(options["log_dir"]).resolve()
@@ -84,14 +86,16 @@ class Command(BaseCommand):
 
     def write_celery_services(self, app_name, prefix=None, log_level="DEBUG", require_rabbitmq=False):
 
-        if require_rabbitmq:
+        requirement_block = "After=network.target"
+        if user_confirms("Configure rabbitmq-server as a dependency? "/
+                         "Do this if rabbitmq runs locally as a systemd service."):
             requirement_block = "After=rabbitmq-server.service\nRequires=rabbitmq-server.service"
-        else:
-            "After=network.target"
 
         prefix_ = "" if not prefix else f"{prefix}_"
         main_fname = f"{prefix_}celery.service"
-        with open(Path(self.dest, main_fname), "w") as o:
+        main_full_path = Path(self.dest, main_fname)
+
+        with open(main_full_path, "w") as o:
             o.write(f"""[Unit]
 Description=Celery Service{f" ({prefix})" if prefix else ""}
 {requirement_block}
@@ -118,7 +122,8 @@ WantedBy=multi-user.target
 """)
 
         beat_fname = f"{prefix_}celerybeat.service"
-        with open(Path(self.dest, beat_fname), "w") as o:
+        beat_full_path = Path(self.dest, beat_fname)
+        with open(beat_full_path, "w") as o:
             o.write(f"""[Unit]
 Description=Celery Beat Service{f" ({prefix})" if prefix else ""}
 After=network.target
@@ -136,4 +141,24 @@ RestartSec=1
 
 [Install]
 WantedBy=multi-user.target
+""")
+
+        print(f"""
+Service files written to: {self.dest.relative_to(self.working_directory)}.
+Logs written to: {self.log_dir.relative_to(self.working_directory)}.
+
+*Make sure these directories are gitignored!*
+
+Initial deployment (first time only):
+    sudo ln -sf {main_full_path.absolute()} /etc/systemd/system/
+    sudo ln -sf {beat_full_path.absolute()} /etc/systemd/system/
+    sudo systemctl enable celery
+    sudo systemctl enable celerybeat
+    sudo systemctl start celery
+    sudo systemctl start celery
+
+Reload services:
+    sudo systemctl daemon-reload
+    sudo systemctl restart celery
+    sudo systemctl restart celerybeat
 """)

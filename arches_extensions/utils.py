@@ -125,4 +125,13 @@ def get_graph(name_or_uuid):
 
     return graph
 
+def user_confirms(message="Continue?", default=True):
 
+    message = f"{message} Y/n " if default is True else f"{message} y/N "
+    response = input(message).lower()
+    if not response:
+        return default
+    elif response.startswith("y"):
+        return True
+    else:
+        return False
