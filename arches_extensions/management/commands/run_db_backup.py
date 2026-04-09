@@ -6,43 +6,57 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from arches_extensions.utils import ArchesHelpTextFormatter
+
 class Command(BaseCommand):
     """Run pg_dump to SQL file. Creates a local file and then uploads to S3.
-    This command assumes you have the aws cli tool installed and configured.
 
-    Follows this backup pattern:
+Follows this backup pattern:
 
-    - Daily backups for the last 10 days
-    - Backups on the 1st and 15th of each month forever
+1. Rotated daily backups for the last 10 days, stored locally and also synced to S3 bucket
+2. Backups on the 1st and 15th of each month forever, only uploaded to S3 bucket (not stored locally)
 
-    Daily backups are stored locally and rotated everyday. Directory structure:
+Local storage directory structure:
 
-    - **LOCAL**
+```
+.db_backups/
+    daily/
+        <YYYYMMDD>__<db name>.sql <- repeated for the last 10 days
+```
 
-        .db_backups/daily/
-            <YYYYMMDD>__<db name>.sql
-            (repeated for the last 10 days)
+S3 bucket directory structure:
 
-    - **S3**
+```
+bucket_name/
+    daily/ <- synced from local daily directory (see above)
+    <YYYY>/ <- all 1st and 15th of the month backups for one year
+        <YYYY>0101__<db name>.sql <- Jan 1st backup
+        <YYYY>0115__<db name>.sql <- Jan 15th backup
+        <YYYY>0201__<db name>.sql <- etc.
+```
 
-        bucket_name/daily <- synced from local daily directory
-        YYYY/
-        all 1st and 15th of the month backups for one year
-        YYYY/
-        same for another year, etc.
+This command assumes you have the [AWS CLI tool](https://aws.amazon.com/cli/) installed and configured.
+
+Args:
+    
+- `bucket-name`: Name of the S3 bucket the backups will be synced to.
+- `--aws-profile`: Optionally pass a specific aws profile to be used for the `aws s3 cp ...` command
+- `--skip-sync`: Don't sync the daily backups to S3 (useful during testing)
+- `--skip-rotate`: "Don't rotate i.e. trim off dailies older than 10 days"
     """
 
     def __init__(self, *args, **kwargs):
         self.help = self.__doc__
 
     def add_arguments(self, parser):
-
+        parser.formatter_class = ArchesHelpTextFormatter
         parser.add_argument(
             "bucket-name",
+            help="Name of the S3 bucket the backups will be synced to.",
         )
         parser.add_argument(
             "--aws-profile",
-            help="Optionally pass a specific aws profile to be used for the upload command"
+            help="Optionally pass a specific aws profile to be used for the ``aws s3 cp`` command"
         )
         parser.add_argument(
             "--skip-sync",
@@ -52,7 +66,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "--skip-rotate",
             action="store_true",
-            help="Don't rotate and trim off dailies older than 10 days"
+            help="Don't rotate i.e. trim off dailies older than 10 days"
         )
 
     def handle(self, *args, **options):

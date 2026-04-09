@@ -1,44 +1,50 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from arches_extensions.utils import ArchesHelpTextFormatter, ArchesCLIStyles
 from arches_extensions.managers import ExtensionManager
 
-s = ArchesCLIStyles()
+_s = ArchesCLIStyles()
 
 class Command(BaseCommand):
     """
-    Use this command to manage extensions within Arches.
-    
-    Usage:
+Use this command to manage extensions within Arches.
 
-        python manage.py extension [operation] [extension_type] [-s/--source] [-n/--name] [--overwrite]
+Usage:
 
-    Operations:
+    python manage.py extension [operation] [extension_type] [-s/--source] [-n/--name] [--overwrite]
 
-    - `list`
-    - `register`
-    - `unregister`
-    - `activate`
-    - `deactivate`
-    
-    Use `list` for quick inspection of the database. If you need to supply a `--name` for an operation, use the value that is printed by the `list` operation.
+Operations:
 
-    When you `register` an extension a new ORM instance is created. Add `--overwrite` update an existing instance based on the primary key of the extension defined in `--source`. Note: the name of the primary key field is different for every extension, but generally is something like "widgetid".
+- `list`
+    - Use `list` for quick inspection of the database. If you need to supply a `--name` 
+for an operation, use the value that is printed by the `list` operation.
+- `register`
+    - When you `register` an extension a new database object for that extension instance is 
+created. Add `--overwrite` 
+update an existing instance based on the primary key of the extension defined in 
+`--source`. Note: the name of the primary key field is different for every extension, 
+but generally is something like "widgetid".
+- `unregister`
+    - Running `unregister` will delete the specified instance from the database.
+- `activate`
+    - The `activate` and `deactivate` operations are only valid operations for a few different
+extension types. These actions alter an instance's `config['show']` value, but do not
+create or delete the instance. A deactivated extension will be hidden from the user
+interface but remain in the database.
+- `deactivate`
+    See above.
 
-    Running `unregister` will delete the specified instance from the database.
+Extension types:
 
-    The `activate` and `deactivate` operations are only valid operations for a few different extension types. These actions alter an instance's `config['show']` value, but do not create or delete the instance. A deactivated extension will be hidden from the user interface but remain in the database. 
+- `card-component`
+- `datatype`
+- `etl-module`
+- `function`
+- `plugin` &rarr; use this for "workflows"
+- `report`
+- `search-filter`
+- `widget`
 
-    Extension types:
-
-    - `card-component`
-    - `datatype`
-    - `etl-module`
-    - `function`
-    - `plugin` &rarr; use this for "workflows"
-    - `report`
-    - `search-filter`
-    - `widget`
 
     """
 
@@ -59,11 +65,11 @@ class Command(BaseCommand):
                 "deactivate",
             ],
             help=f"""OPERATION
-            {s.req('list')}: List registered extensions of the specified type. The {s.opt('name')} of each extension is printed.
-            {s.req('register')}: Register extension from source file (provide {s.opt('-s/--source')}).
-            {s.req('unregister')}: Unregister the specified extension (provide {s.opt('-n/--name')}).
-            {s.req('activate')}: Activate this extension (not available for all extension types) (provide {s.opt('-n/--name')}).
-            {s.req('deactivate')}: Deactivate this extension but don't unregister it (not available for all extension types, experimental) (provide {s.opt('-n/--name')}).
+            {_s.req('list')}: List registered extensions of the specified type. The {_s.opt('name')} of each extension is printed.
+            {_s.req('register')}: Register extension from source file (provide {_s.opt('-s/--source')}).
+            {_s.req('unregister')}: Unregister the specified extension (provide {_s.opt('-n/--name')}).
+            {_s.req('activate')}: Activate this extension (not available for all extension types) (provide {_s.opt('-n/--name')}).
+            {_s.req('deactivate')}: Deactivate this extension but don't unregister it (not available for all extension types, experimental) (provide {_s.opt('-n/--name')}).
             """
         )
         parser.add_argument(
@@ -78,22 +84,22 @@ class Command(BaseCommand):
                 "search-filter",
                 "widget",
             ],
-            help=f"""EXTENSION TYPE
+            help="""EXTENSION TYPE
             Specify what type of extension you are managing.
             """
         )
         parser.add_argument(
             "-s", "--source",
-            help=f"Use with {s.req('register')} to provide a JSON or .py file when registering an extension.",
+            help=f"Use with {_s.req('register')} to provide a JSON or .py file when registering an extension.",
         )
         parser.add_argument(
             "-n", "--name",
-            help=f"Use with {s.req('unregister')} for the name of the extension to remove."
+            help=f"Use with {_s.req('unregister')} for the name of the extension to remove."
         )
         parser.add_argument(
             "--overwrite",
             action="store_true",
-            help=f"Use with {s.req('register')} to overwrite an existing extension with the provided source definition.",
+            help=f"Use with {_s.req('register')} to overwrite an existing extension with the provided source definition.",
         )
 
     def handle(self, *args, **options):
@@ -119,7 +125,7 @@ class Command(BaseCommand):
             manager.set_active(name=options["name"])
 
         if options["operation"] == "deactivate":
-            print(s.warn("Warning: Deactivating core Arches extensions, like the Advanced "\
+            print(_s.warn("Warning: Deactivating core Arches extensions, like the Advanced "\
             "search filter, may cause unintended consequences."))
             print(f"Deactivate {ex}: {options['name']}")
             manager.set_active(name=options["name"], active=False)
