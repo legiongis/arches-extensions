@@ -1,14 +1,10 @@
 import os
-import imp
-import uuid
-import json
 from datetime import datetime
 import subprocess
 from pathlib import Path
 
 from django.conf import settings
-from django.core.management.base import BaseCommand, CommandError
-from django.db.utils import IntegrityError
+from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     """Run pg_dump to SQL file. Creates a local file and then uploads to S3.
@@ -20,17 +16,20 @@ class Command(BaseCommand):
     - Backups on the 1st and 15th of each month forever
 
     Daily backups are stored locally and rotated everyday. Directory structure:
-    LOCAL
-      .db_backups/daily/
-        <YYYYMMDD>__<db name>.sql
-        (repeated for the last 10 days)
 
-    S3
-      bucket_name/daily <- synced from local daily directory
-      YYYY/
-       all 1st and 15th of the month backups for one year
-      YYYY/
-       same for another year, etc.
+    - **LOCAL**
+
+        .db_backups/daily/
+            <YYYYMMDD>__<db name>.sql
+            (repeated for the last 10 days)
+
+    - **S3**
+
+        bucket_name/daily <- synced from local daily directory
+        YYYY/
+        all 1st and 15th of the month backups for one year
+        YYYY/
+        same for another year, etc.
     """
 
     def __init__(self, *args, **kwargs):

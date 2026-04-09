@@ -1,18 +1,20 @@
 # Arches Extensions
 
 - [Overview](#overview)
-- [Installation]
+- [Installation](#installation)
 - [Command structure](#command-structure)
 
 ## Overview
 
-The purpose of this package is unify some custom utilities that I've developed on and off while I work on different Arches projects. It is a work in progress. Hopefully, some of this content will eventually become part of core Arches, and in the meantime I hope others find it helpful.
+The purpose of this package is unify some custom utilities that I've developed on and off while I work on different Arches projects. It is a work in progress. Maybe some of these will eventually become part of core Arches, and in the meantime I hope others find it helpful.
 
-So far, it is just a suite of Django management commands, though more content may be added in the future.
+This package only contains a suite of Django management commands, though more content may be added in the future.
 
 **repo** -- [legiongis/arches-extensions](https://github.com/legiongis/arches-extensions)
 
 **docs site** -- [legiongis.github.io/arches-extensions](https://legiongis.github.io/arches-extensions).
+
+**management commands** - [legiongis.github.io/arches-extensions/arches_extensions/management/commands.html](https://legiongis.github.io/arches-extensions/arches_extensions/management/commands.html).
 
 **get in touch** -- Feel free to [open a ticket](https://github.com/legiongis/arches-extensions/issues) or get in touch directly, adam@legiongis.com. I'd love to collaborate if you see something here that could be better, or if you have ideas for other utilities that should be added. The only requirement is that the content be generic, not implementation-specific.
 
