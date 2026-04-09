@@ -174,6 +174,9 @@
             <li>
                     <a class="function" href="#get_graph">get_graph</a>
             </li>
+            <li>
+                    <a class="function" href="#user_confirms">user_confirms</a>
+            </li>
     </ul>
 
 
@@ -195,15 +198,15 @@
 
                         <label class="view-source-button" for="mod-utils-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">argparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">RawTextHelpFormatter</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">import</span> <span class="nn">uuid</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">import</span> <span class="nn">textwrap</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">RawTextHelpFormatter</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Lower</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">django.db.models.functions</span> <span class="kn">import</span> <span class="n">Lower</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">arches.app.models.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">arches.app.models.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ArchesCLIStyles</span><span class="p">():</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="k">class</span> <span class="nc">ArchesCLIStyles</span><span class="p">():</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Styles for Arches CLI output. Borrowed heavily from https://stackoverflow.com/a/26445590/3873885.</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
 </span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">    Usage:</span>
@@ -235,7 +238,7 @@
 </span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>    <span class="n">reverse</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[07m&#39;</span>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="n">strikethrough</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[09m&#39;</span>
 </span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="n">invisible</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[08m&#39;</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">fg</span><span class="p">:</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="k">class</span> <span class="nc">fg</span><span class="p">:</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[30m&#39;</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m&#39;</span>
 </span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[32m&#39;</span>
@@ -251,7 +254,7 @@
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="n">lightblue</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[94m&#39;</span>
 </span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="n">pink</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[95m&#39;</span>
 </span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">lightcyan</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[96m&#39;</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">bg</span><span class="p">:</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="k">class</span> <span class="nc">bg</span><span class="p">:</span>
 </span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[40m&#39;</span>
 </span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[41m&#39;</span>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[42m&#39;</span>
@@ -262,7 +265,7 @@
 </span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>        <span class="n">lightgrey</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[47m&#39;</span>
 </span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>        <span class="n">salmon</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[101m&#39;</span>
 </span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="k">def</span> <span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a><span class="sd">        This is a helper method that may be useful during style development.</span>
 </span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
@@ -277,30 +280,30 @@
 </span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>            <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 </span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>            <span class="n">x</span> <span class="o">+=</span> <span class="mi">5</span>
 </span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>    <span class="k">def</span> <span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightgreen</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="k">def</span> <span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">yellow</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightred</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">blink</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">cyan</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ArchesHelpTextFormatter</span><span class="p">(</span><span class="n">RawTextHelpFormatter</span><span class="p">):</span>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="k">class</span> <span class="nc">ArchesHelpTextFormatter</span><span class="p">(</span><span class="n">RawTextHelpFormatter</span><span class="p">):</span>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Help message formatter that applies optional text styling.&quot;&quot;&quot;</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_split_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">_split_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
 </span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>            <span class="n">ret</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">width</span><span class="p">)]</span>
 </span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>        <span class="k">return</span> <span class="n">ret</span>
 </span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_graph</span><span class="p">(</span><span class="n">name_or_uuid</span><span class="p">):</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a><span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="n">name_or_uuid</span><span class="p">):</span>
 </span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; Utility function to get a graph by its name or UUID. &quot;&quot;&quot;</span>
 </span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>    <span class="n">graph</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="k">try</span><span class="p">:</span>
@@ -321,6 +324,17 @@
 </span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>                <span class="n">graph</span> <span class="o">=</span> <span class="n">lookup</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
 </span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>
 </span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>    <span class="k">return</span> <span class="n">graph</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="k">def</span> <span class="nf">user_confirms</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Continue?&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> Y/n &quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">True</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> y/N &quot;</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>    <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
+</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>        <span class="k">return</span> <span class="n">default</span>
+</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">):</span>
+</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>        <span class="k">return</span> <span class="kc">False</span>
 </span></pre></div>
 
 
@@ -336,7 +350,7 @@
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles-10"><a href="#ArchesCLIStyles-10"><span class="linenos">10</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ArchesCLIStyles</span><span class="p">():</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles-10"><a href="#ArchesCLIStyles-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">ArchesCLIStyles</span><span class="p">():</span>
 </span><span id="ArchesCLIStyles-11"><a href="#ArchesCLIStyles-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;Styles for Arches CLI output. Borrowed heavily from https://stackoverflow.com/a/26445590/3873885.</span>
 </span><span id="ArchesCLIStyles-12"><a href="#ArchesCLIStyles-12"><span class="linenos">12</span></a>
 </span><span id="ArchesCLIStyles-13"><a href="#ArchesCLIStyles-13"><span class="linenos">13</span></a><span class="sd">    Usage:</span>
@@ -368,7 +382,7 @@
 </span><span id="ArchesCLIStyles-39"><a href="#ArchesCLIStyles-39"><span class="linenos">39</span></a>    <span class="n">reverse</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[07m&#39;</span>
 </span><span id="ArchesCLIStyles-40"><a href="#ArchesCLIStyles-40"><span class="linenos">40</span></a>    <span class="n">strikethrough</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[09m&#39;</span>
 </span><span id="ArchesCLIStyles-41"><a href="#ArchesCLIStyles-41"><span class="linenos">41</span></a>    <span class="n">invisible</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[08m&#39;</span>
-</span><span id="ArchesCLIStyles-42"><a href="#ArchesCLIStyles-42"><span class="linenos">42</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">fg</span><span class="p">:</span>
+</span><span id="ArchesCLIStyles-42"><a href="#ArchesCLIStyles-42"><span class="linenos">42</span></a>    <span class="k">class</span> <span class="nc">fg</span><span class="p">:</span>
 </span><span id="ArchesCLIStyles-43"><a href="#ArchesCLIStyles-43"><span class="linenos">43</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[30m&#39;</span>
 </span><span id="ArchesCLIStyles-44"><a href="#ArchesCLIStyles-44"><span class="linenos">44</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m&#39;</span>
 </span><span id="ArchesCLIStyles-45"><a href="#ArchesCLIStyles-45"><span class="linenos">45</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[32m&#39;</span>
@@ -384,7 +398,7 @@
 </span><span id="ArchesCLIStyles-55"><a href="#ArchesCLIStyles-55"><span class="linenos">55</span></a>        <span class="n">lightblue</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[94m&#39;</span>
 </span><span id="ArchesCLIStyles-56"><a href="#ArchesCLIStyles-56"><span class="linenos">56</span></a>        <span class="n">pink</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[95m&#39;</span>
 </span><span id="ArchesCLIStyles-57"><a href="#ArchesCLIStyles-57"><span class="linenos">57</span></a>        <span class="n">lightcyan</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[96m&#39;</span>
-</span><span id="ArchesCLIStyles-58"><a href="#ArchesCLIStyles-58"><span class="linenos">58</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">bg</span><span class="p">:</span>
+</span><span id="ArchesCLIStyles-58"><a href="#ArchesCLIStyles-58"><span class="linenos">58</span></a>    <span class="k">class</span> <span class="nc">bg</span><span class="p">:</span>
 </span><span id="ArchesCLIStyles-59"><a href="#ArchesCLIStyles-59"><span class="linenos">59</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[40m&#39;</span>
 </span><span id="ArchesCLIStyles-60"><a href="#ArchesCLIStyles-60"><span class="linenos">60</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[41m&#39;</span>
 </span><span id="ArchesCLIStyles-61"><a href="#ArchesCLIStyles-61"><span class="linenos">61</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[42m&#39;</span>
@@ -395,7 +409,7 @@
 </span><span id="ArchesCLIStyles-66"><a href="#ArchesCLIStyles-66"><span class="linenos">66</span></a>        <span class="n">lightgrey</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[47m&#39;</span>
 </span><span id="ArchesCLIStyles-67"><a href="#ArchesCLIStyles-67"><span class="linenos">67</span></a>        <span class="n">salmon</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[101m&#39;</span>
 </span><span id="ArchesCLIStyles-68"><a href="#ArchesCLIStyles-68"><span class="linenos">68</span></a>
-</span><span id="ArchesCLIStyles-69"><a href="#ArchesCLIStyles-69"><span class="linenos">69</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-69"><a href="#ArchesCLIStyles-69"><span class="linenos">69</span></a>    <span class="k">def</span> <span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-70"><a href="#ArchesCLIStyles-70"><span class="linenos">70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="ArchesCLIStyles-71"><a href="#ArchesCLIStyles-71"><span class="linenos">71</span></a><span class="sd">        This is a helper method that may be useful during style development.</span>
 </span><span id="ArchesCLIStyles-72"><a href="#ArchesCLIStyles-72"><span class="linenos">72</span></a>
@@ -410,19 +424,19 @@
 </span><span id="ArchesCLIStyles-81"><a href="#ArchesCLIStyles-81"><span class="linenos">81</span></a>            <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 </span><span id="ArchesCLIStyles-82"><a href="#ArchesCLIStyles-82"><span class="linenos">82</span></a>            <span class="n">x</span> <span class="o">+=</span> <span class="mi">5</span>
 </span><span id="ArchesCLIStyles-83"><a href="#ArchesCLIStyles-83"><span class="linenos">83</span></a>
-</span><span id="ArchesCLIStyles-84"><a href="#ArchesCLIStyles-84"><span class="linenos">84</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-84"><a href="#ArchesCLIStyles-84"><span class="linenos">84</span></a>    <span class="k">def</span> <span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-85"><a href="#ArchesCLIStyles-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightgreen</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="ArchesCLIStyles-86"><a href="#ArchesCLIStyles-86"><span class="linenos">86</span></a>
-</span><span id="ArchesCLIStyles-87"><a href="#ArchesCLIStyles-87"><span class="linenos">87</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-87"><a href="#ArchesCLIStyles-87"><span class="linenos">87</span></a>    <span class="k">def</span> <span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-88"><a href="#ArchesCLIStyles-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">yellow</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="ArchesCLIStyles-89"><a href="#ArchesCLIStyles-89"><span class="linenos">89</span></a>
-</span><span id="ArchesCLIStyles-90"><a href="#ArchesCLIStyles-90"><span class="linenos">90</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-90"><a href="#ArchesCLIStyles-90"><span class="linenos">90</span></a>    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-91"><a href="#ArchesCLIStyles-91"><span class="linenos">91</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="ArchesCLIStyles-92"><a href="#ArchesCLIStyles-92"><span class="linenos">92</span></a>
-</span><span id="ArchesCLIStyles-93"><a href="#ArchesCLIStyles-93"><span class="linenos">93</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-93"><a href="#ArchesCLIStyles-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-94"><a href="#ArchesCLIStyles-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightred</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">blink</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="ArchesCLIStyles-95"><a href="#ArchesCLIStyles-95"><span class="linenos">95</span></a>
-</span><span id="ArchesCLIStyles-96"><a href="#ArchesCLIStyles-96"><span class="linenos">96</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+</span><span id="ArchesCLIStyles-96"><a href="#ArchesCLIStyles-96"><span class="linenos">96</span></a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles-97"><a href="#ArchesCLIStyles-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">cyan</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -577,7 +591,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.print_ansi_codes"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.print_ansi_codes-69"><a href="#ArchesCLIStyles.print_ansi_codes-69"><span class="linenos">69</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.print_ansi_codes-69"><a href="#ArchesCLIStyles.print_ansi_codes-69"><span class="linenos">69</span></a>    <span class="k">def</span> <span class="nf">print_ansi_codes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.print_ansi_codes-70"><a href="#ArchesCLIStyles.print_ansi_codes-70"><span class="linenos">70</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="ArchesCLIStyles.print_ansi_codes-71"><a href="#ArchesCLIStyles.print_ansi_codes-71"><span class="linenos">71</span></a><span class="sd">        This is a helper method that may be useful during style development.</span>
 </span><span id="ArchesCLIStyles.print_ansi_codes-72"><a href="#ArchesCLIStyles.print_ansi_codes-72"><span class="linenos">72</span></a>
@@ -612,7 +626,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.req"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.req-84"><a href="#ArchesCLIStyles.req-84"><span class="linenos">84</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.req-84"><a href="#ArchesCLIStyles.req-84"><span class="linenos">84</span></a>    <span class="k">def</span> <span class="nf">req</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.req-85"><a href="#ArchesCLIStyles.req-85"><span class="linenos">85</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightgreen</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -631,7 +645,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.opt"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.opt-87"><a href="#ArchesCLIStyles.opt-87"><span class="linenos">87</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.opt-87"><a href="#ArchesCLIStyles.opt-87"><span class="linenos">87</span></a>    <span class="k">def</span> <span class="nf">opt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.opt-88"><a href="#ArchesCLIStyles.opt-88"><span class="linenos">88</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">yellow</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -650,7 +664,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.invert"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.invert-90"><a href="#ArchesCLIStyles.invert-90"><span class="linenos">90</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.invert-90"><a href="#ArchesCLIStyles.invert-90"><span class="linenos">90</span></a>    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.invert-91"><a href="#ArchesCLIStyles.invert-91"><span class="linenos">91</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -669,7 +683,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.error"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.error-93"><a href="#ArchesCLIStyles.error-93"><span class="linenos">93</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.error-93"><a href="#ArchesCLIStyles.error-93"><span class="linenos">93</span></a>    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.error-94"><a href="#ArchesCLIStyles.error-94"><span class="linenos">94</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">lightred</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">blink</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -688,7 +702,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.warn"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.warn-96"><a href="#ArchesCLIStyles.warn-96"><span class="linenos">96</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.warn-96"><a href="#ArchesCLIStyles.warn-96"><span class="linenos">96</span></a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 </span><span id="ArchesCLIStyles.warn-97"><a href="#ArchesCLIStyles.warn-97"><span class="linenos">97</span></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fg</span><span class="o">.</span><span class="n">cyan</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">bold</span><span class="si">}{</span><span class="n">string</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="si">}</span><span class="s2">&quot;</span>
 </span></pre></div>
 
@@ -708,7 +722,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.fg"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.fg-42"><a href="#ArchesCLIStyles.fg-42"><span class="linenos">42</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">fg</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.fg-42"><a href="#ArchesCLIStyles.fg-42"><span class="linenos">42</span></a>    <span class="k">class</span> <span class="nc">fg</span><span class="p">:</span>
 </span><span id="ArchesCLIStyles.fg-43"><a href="#ArchesCLIStyles.fg-43"><span class="linenos">43</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[30m&#39;</span>
 </span><span id="ArchesCLIStyles.fg-44"><a href="#ArchesCLIStyles.fg-44"><span class="linenos">44</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m&#39;</span>
 </span><span id="ArchesCLIStyles.fg-45"><a href="#ArchesCLIStyles.fg-45"><span class="linenos">45</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[32m&#39;</span>
@@ -921,7 +935,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesCLIStyles.bg"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.bg-58"><a href="#ArchesCLIStyles.bg-58"><span class="linenos">58</span></a>    <span class="k">class</span><span class="w"> </span><span class="nc">bg</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesCLIStyles.bg-58"><a href="#ArchesCLIStyles.bg-58"><span class="linenos">58</span></a>    <span class="k">class</span> <span class="nc">bg</span><span class="p">:</span>
 </span><span id="ArchesCLIStyles.bg-59"><a href="#ArchesCLIStyles.bg-59"><span class="linenos">59</span></a>        <span class="n">black</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[40m&#39;</span>
 </span><span id="ArchesCLIStyles.bg-60"><a href="#ArchesCLIStyles.bg-60"><span class="linenos">60</span></a>        <span class="n">red</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[41m&#39;</span>
 </span><span id="ArchesCLIStyles.bg-61"><a href="#ArchesCLIStyles.bg-61"><span class="linenos">61</span></a>        <span class="n">green</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[42m&#39;</span>
@@ -1056,9 +1070,9 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#ArchesHelpTextFormatter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesHelpTextFormatter-99"><a href="#ArchesHelpTextFormatter-99"><span class="linenos"> 99</span></a><span class="k">class</span><span class="w"> </span><span class="nc">ArchesHelpTextFormatter</span><span class="p">(</span><span class="n">RawTextHelpFormatter</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="ArchesHelpTextFormatter-99"><a href="#ArchesHelpTextFormatter-99"><span class="linenos"> 99</span></a><span class="k">class</span> <span class="nc">ArchesHelpTextFormatter</span><span class="p">(</span><span class="n">RawTextHelpFormatter</span><span class="p">):</span>
 </span><span id="ArchesHelpTextFormatter-100"><a href="#ArchesHelpTextFormatter-100"><span class="linenos">100</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Help message formatter that applies optional text styling.&quot;&quot;&quot;</span>
-</span><span id="ArchesHelpTextFormatter-101"><a href="#ArchesHelpTextFormatter-101"><span class="linenos">101</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_split_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+</span><span id="ArchesHelpTextFormatter-101"><a href="#ArchesHelpTextFormatter-101"><span class="linenos">101</span></a>    <span class="k">def</span> <span class="nf">_split_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
 </span><span id="ArchesHelpTextFormatter-102"><a href="#ArchesHelpTextFormatter-102"><span class="linenos">102</span></a>        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
 </span><span id="ArchesHelpTextFormatter-103"><a href="#ArchesHelpTextFormatter-103"><span class="linenos">103</span></a>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
 </span><span id="ArchesHelpTextFormatter-104"><a href="#ArchesHelpTextFormatter-104"><span class="linenos">104</span></a>            <span class="n">ret</span> <span class="o">+=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">width</span><span class="p">)]</span>
@@ -1098,7 +1112,7 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
 
     </div>
     <a class="headerlink" href="#get_graph"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="get_graph-107"><a href="#get_graph-107"><span class="linenos">107</span></a><span class="k">def</span><span class="w"> </span><span class="nf">get_graph</span><span class="p">(</span><span class="n">name_or_uuid</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_graph-107"><a href="#get_graph-107"><span class="linenos">107</span></a><span class="k">def</span> <span class="nf">get_graph</span><span class="p">(</span><span class="n">name_or_uuid</span><span class="p">):</span>
 </span><span id="get_graph-108"><a href="#get_graph-108"><span class="linenos">108</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; Utility function to get a graph by its name or UUID. &quot;&quot;&quot;</span>
 </span><span id="get_graph-109"><a href="#get_graph-109"><span class="linenos">109</span></a>    <span class="n">graph</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span id="get_graph-110"><a href="#get_graph-110"><span class="linenos">110</span></a>    <span class="k">try</span><span class="p">:</span>
@@ -1125,6 +1139,33 @@ and <code><a href="#ArchesCLIStyles.invisible">invisible</a></code> work with th
             <div class="docstring"><p>Utility function to get a graph by its name or UUID.</p>
 </div>
 
+
+                </section>
+                <section id="user_confirms">
+                            <input id="user_confirms-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">user_confirms</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">message</span><span class="o">=</span><span class="s1">&#39;Continue?&#39;</span>, </span><span class="param"><span class="n">default</span><span class="o">=</span><span class="kc">True</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="user_confirms-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#user_confirms"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="user_confirms-129"><a href="#user_confirms-129"><span class="linenos">129</span></a><span class="k">def</span> <span class="nf">user_confirms</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Continue?&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span><span id="user_confirms-130"><a href="#user_confirms-130"><span class="linenos">130</span></a>
+</span><span id="user_confirms-131"><a href="#user_confirms-131"><span class="linenos">131</span></a>    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> Y/n &quot;</span> <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">True</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> y/N &quot;</span>
+</span><span id="user_confirms-132"><a href="#user_confirms-132"><span class="linenos">132</span></a>    <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="user_confirms-133"><a href="#user_confirms-133"><span class="linenos">133</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">response</span><span class="p">:</span>
+</span><span id="user_confirms-134"><a href="#user_confirms-134"><span class="linenos">134</span></a>        <span class="k">return</span> <span class="n">default</span>
+</span><span id="user_confirms-135"><a href="#user_confirms-135"><span class="linenos">135</span></a>    <span class="k">elif</span> <span class="n">response</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">):</span>
+</span><span id="user_confirms-136"><a href="#user_confirms-136"><span class="linenos">136</span></a>        <span class="k">return</span> <span class="kc">True</span>
+</span><span id="user_confirms-137"><a href="#user_confirms-137"><span class="linenos">137</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="user_confirms-138"><a href="#user_confirms-138"><span class="linenos">138</span></a>        <span class="k">return</span> <span class="kc">False</span>
+</span></pre></div>
+
+
+    
 
                 </section>
     </main>

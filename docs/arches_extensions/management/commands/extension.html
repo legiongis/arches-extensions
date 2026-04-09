@@ -69,14 +69,14 @@
 
                         <label class="view-source-button" for="mod-extension-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.core.management.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseCommand</span><span class="p">,</span> <span class="n">CommandError</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="kn">from</span> <span class="nn">django.core.management.base</span> <span class="kn">import</span> <span class="n">BaseCommand</span><span class="p">,</span> <span class="n">CommandError</span>
 </span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">arches_extensions.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchesHelpTextFormatter</span><span class="p">,</span> <span class="n">ArchesCLIStyles</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">arches_extensions.managers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExtensionManager</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="kn">from</span> <span class="nn">arches_extensions.utils</span> <span class="kn">import</span> <span class="n">ArchesHelpTextFormatter</span><span class="p">,</span> <span class="n">ArchesCLIStyles</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">arches_extensions.managers</span> <span class="kn">import</span> <span class="n">ExtensionManager</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="n">s</span> <span class="o">=</span> <span class="n">ArchesCLIStyles</span><span class="p">()</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
 </span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="sd">    Use this command to manage extensions within Arches.</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="sd">    </span>
@@ -113,11 +113,11 @@
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 </span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot; @private &quot;&quot;&quot;</span>
 </span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
 </span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="c1"># &quot;&quot;&quot;@private&quot;&quot;&quot;</span>
 </span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">formatter_class</span> <span class="o">=</span> <span class="n">ArchesHelpTextFormatter</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -167,7 +167,7 @@
 </span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>            <span class="n">help</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Use with </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">req</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> to overwrite an existing extension with the provided source definition.&quot;</span><span class="p">,</span>
 </span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>        <span class="p">)</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>
 </span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="n">ex</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">]</span>
 </span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="n">manager</span> <span class="o">=</span> <span class="n">ExtensionManager</span><span class="p">(</span><span class="n">extension_type</span><span class="o">=</span><span class="n">ex</span><span class="p">)</span>
@@ -221,7 +221,7 @@
 
     </div>
     <a class="headerlink" href="#Command"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command-9"><a href="#Command-9"><span class="linenos">  9</span></a><span class="k">class</span><span class="w"> </span><span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command-9"><a href="#Command-9"><span class="linenos">  9</span></a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">BaseCommand</span><span class="p">):</span>
 </span><span id="Command-10"><a href="#Command-10"><span class="linenos"> 10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="Command-11"><a href="#Command-11"><span class="linenos"> 11</span></a><span class="sd">    Use this command to manage extensions within Arches.</span>
 </span><span id="Command-12"><a href="#Command-12"><span class="linenos"> 12</span></a><span class="sd">    </span>
@@ -258,11 +258,11 @@
 </span><span id="Command-43"><a href="#Command-43"><span class="linenos"> 43</span></a>
 </span><span id="Command-44"><a href="#Command-44"><span class="linenos"> 44</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="Command-45"><a href="#Command-45"><span class="linenos"> 45</span></a>
-</span><span id="Command-46"><a href="#Command-46"><span class="linenos"> 46</span></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="Command-46"><a href="#Command-46"><span class="linenos"> 46</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 </span><span id="Command-47"><a href="#Command-47"><span class="linenos"> 47</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot; @private &quot;&quot;&quot;</span>
 </span><span id="Command-48"><a href="#Command-48"><span class="linenos"> 48</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">help</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
 </span><span id="Command-49"><a href="#Command-49"><span class="linenos"> 49</span></a>
-</span><span id="Command-50"><a href="#Command-50"><span class="linenos"> 50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+</span><span id="Command-50"><a href="#Command-50"><span class="linenos"> 50</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
 </span><span id="Command-51"><a href="#Command-51"><span class="linenos"> 51</span></a>        <span class="c1"># &quot;&quot;&quot;@private&quot;&quot;&quot;</span>
 </span><span id="Command-52"><a href="#Command-52"><span class="linenos"> 52</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">formatter_class</span> <span class="o">=</span> <span class="n">ArchesHelpTextFormatter</span>
 </span><span id="Command-53"><a href="#Command-53"><span class="linenos"> 53</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -312,7 +312,7 @@
 </span><span id="Command-97"><a href="#Command-97"><span class="linenos"> 97</span></a>            <span class="n">help</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Use with </span><span class="si">{</span><span class="n">s</span><span class="o">.</span><span class="n">req</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> to overwrite an existing extension with the provided source definition.&quot;</span><span class="p">,</span>
 </span><span id="Command-98"><a href="#Command-98"><span class="linenos"> 98</span></a>        <span class="p">)</span>
 </span><span id="Command-99"><a href="#Command-99"><span class="linenos"> 99</span></a>
-</span><span id="Command-100"><a href="#Command-100"><span class="linenos">100</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+</span><span id="Command-100"><a href="#Command-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 </span><span id="Command-101"><a href="#Command-101"><span class="linenos">101</span></a>
 </span><span id="Command-102"><a href="#Command-102"><span class="linenos">102</span></a>        <span class="n">ex</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">]</span>
 </span><span id="Command-103"><a href="#Command-103"><span class="linenos">103</span></a>        <span class="n">manager</span> <span class="o">=</span> <span class="n">ExtensionManager</span><span class="p">(</span><span class="n">extension_type</span><span class="o">=</span><span class="n">ex</span><span class="p">)</span>
@@ -405,7 +405,7 @@
 
     </div>
     <a class="headerlink" href="#Command.add_arguments"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.add_arguments-50"><a href="#Command.add_arguments-50"><span class="linenos">50</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.add_arguments-50"><a href="#Command.add_arguments-50"><span class="linenos">50</span></a>    <span class="k">def</span> <span class="nf">add_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parser</span><span class="p">):</span>
 </span><span id="Command.add_arguments-51"><a href="#Command.add_arguments-51"><span class="linenos">51</span></a>        <span class="c1"># &quot;&quot;&quot;@private&quot;&quot;&quot;</span>
 </span><span id="Command.add_arguments-52"><a href="#Command.add_arguments-52"><span class="linenos">52</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">formatter_class</span> <span class="o">=</span> <span class="n">ArchesHelpTextFormatter</span>
 </span><span id="Command.add_arguments-53"><a href="#Command.add_arguments-53"><span class="linenos">53</span></a>        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -473,7 +473,7 @@
 
     </div>
     <a class="headerlink" href="#Command.handle"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.handle-100"><a href="#Command.handle-100"><span class="linenos">100</span></a>    <span class="k">def</span><span class="w"> </span><span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Command.handle-100"><a href="#Command.handle-100"><span class="linenos">100</span></a>    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
 </span><span id="Command.handle-101"><a href="#Command.handle-101"><span class="linenos">101</span></a>
 </span><span id="Command.handle-102"><a href="#Command.handle-102"><span class="linenos">102</span></a>        <span class="n">ex</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension_type&quot;</span><span class="p">]</span>
 </span><span id="Command.handle-103"><a href="#Command.handle-103"><span class="linenos">103</span></a>        <span class="n">manager</span> <span class="o">=</span> <span class="n">ExtensionManager</span><span class="p">(</span><span class="n">extension_type</span><span class="o">=</span><span class="n">ex</span><span class="p">)</span>
