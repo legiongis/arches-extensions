@@ -1,7 +1,8 @@
 import csv
 import logging
 from pathlib import Path
-from zipfile import ZipFile
+from zipfile import ZipFile, ZIP_DEFLATED
+from time import strftime, localtime
 
 from django.core.management.base import BaseCommand
 
@@ -65,6 +66,7 @@ specific resources.
         for scope, files in scopes:
             print(f"Getting files for: {scope}")
             info = self.collect_file_info(files, include_orphans=options["include_orphans"])
+            print("  --all info collected")
             if options["make_csv"]:
                 if len(info) == 0:
                     print("no data to write, skipping")
@@ -96,13 +98,31 @@ specific resources.
         print(f"File objects: {files.count()}")
 
         ## quick check for missing files
-        missing = []
-        for f in files:
-            if not f.path.storage.exists(f.path.name):
-                print("file missing:", f.path.path)
-                missing.append(f)
-        print(f"Missing files to be skipped: {len(missing)}")
-        files = [i for i in files if i not in missing]
+#        missing = []
+#        for f in files:
+#            if not f.path.storage.exists(f.path.name):
+#                print("file missing:", f.path.name)
+#                missing.append(f)
+#        print(f"Missing files to be skipped: {len(missing)}")
+#        files = [i for i in files if not i in missing]
+
+        def lookup_file_info(id):
+
+            info = {}
+            f = file_lookup.get(id)
+            if f:
+                if f.tile:
+                    for k, v in tile.data.items():
+                        node = node_lookup.get(k, Node.objects.get(pk=k))
+                        if node.datatype == "file-list":
+                            for fl in v:
+                                if fl["file_id"] == str(f.pk):
+                                    lm = fl["lastModified"]
+                                    lm = strftime('%Y-%m-%d %H:%M:%S', localtime(lm/1000))
+                info["name"] = Path(file_lookup[id].path.url).name
+                info["path"] = file_lookup[id].path.url if file_lookup[id].path.url.startswith("http") else Path(file_lookup[id].path.path).name
+                info["last_modified"] = lm
+            return info
 
         ## iterate files and create a lookup for tiles they are referenced by
         file_lookup = {}
@@ -141,28 +161,32 @@ specific resources.
                             continue
                         found_ids.append(id)
                         matched_total += 1
+                        finfo = lookup_file_info(id)
                         file_info.append({
                             "resource id": resid,
-                            "resource name": res.displayname,
+                            "resource name": res.displayname(),
                             "node name": node.name,
                             "file id": id,
                             "file name (original)": i['name'],
-                            "file name (actual)": Path(file_lookup[id].path.name).name,
-                            "file path": file_lookup[id].path.path,
+                            "file name (actual)": finfo.get("name", "n/a"),
+                            "file path": finfo.get("path", "n/a"),
+                            "last modified": finfo.get("last_modified", "n/a")
                         })
             orphans = File.objects.filter(tile=tile).exclude(fileid__in=found_ids)
             orphan_total += orphans.count()
             if include_orphans:
                 for orphan in orphans:
                     id = str(orphan.pk)
+                    finfo = lookup_file_info(id)
                     file_info.append({
                         "resource id": resid,
                         "resource name": res.displayname,
                         "node name": "<unknown>",
                         "file id": id,
                         "file name (original)": "<unknown>",
-                        "file name (actual)": Path(file_lookup[id].path.name).name,
-                        "file path": file_lookup[id].path.path,
+                        "file name (actual)": finfo.get("name", "n/a"),
+                        "file path": finfo.get("path", "n/a"),
+                        "last modified": finfo.get("last_modified", "n/a")
                     })
 
         print(f"Files in tiles without fileids: {len(files_without_id)}")
