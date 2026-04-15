@@ -1,7 +1,7 @@
 import csv
 import logging
 from pathlib import Path
-from zipfile import ZipFile, ZIP_DEFLATED
+from zipfile import ZipFile
 from time import strftime, localtime
 
 from django.core.management.base import BaseCommand
@@ -37,6 +37,7 @@ specific resources.
     """
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.help = self.__doc__
 
     def add_arguments(self, parser):

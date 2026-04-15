@@ -1,6 +1,6 @@
 import os
 from django.core import management
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.conf import settings
 
 
@@ -10,6 +10,7 @@ class Command(BaseCommand):
     """
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.help = self.__doc__
 
     def add_arguments(self, parser):
