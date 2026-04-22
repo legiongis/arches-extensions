@@ -1,5 +1,7 @@
 import sys
 from pathlib import Path
+
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from arches_extensions.utils import user_confirms
@@ -40,7 +42,7 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             "--log-dir",
-            default=".logs",
+            default=settings.LOG_DIR,
             help="Path to where logs and pid files will go. Defaults to .logs in root directory."
         )
         parser.add_argument(
@@ -88,7 +90,7 @@ class Command(BaseCommand):
     def write_celery_services(self, app_name, prefix=None, log_level="DEBUG", require_rabbitmq=False):
 
         requirement_block = "After=network.target"
-        if user_confirms("Configure rabbitmq-server as a dependency? "/
+        if user_confirms("Configure rabbitmq-server as a dependency? " +
                          "Do this if rabbitmq runs locally as a systemd service."):
             requirement_block = "After=rabbitmq-server.service\nRequires=rabbitmq-server.service"
 
