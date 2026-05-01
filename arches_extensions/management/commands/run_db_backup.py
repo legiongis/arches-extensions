@@ -21,7 +21,7 @@ Local storage directory structure:
 ```
 .db_backups/
     daily/
-        <YYYYMMDD>__<db name>.sql <- repeated for the last 10 days
+        <db name>__<YYYYMMDD>.sql <- repeated for the last 10 days
 ```
 
 S3 bucket directory structure:
@@ -30,9 +30,9 @@ S3 bucket directory structure:
 bucket_name/
     daily/ <- synced from local daily directory (see above)
     <YYYY>/ <- all 1st and 15th of the month backups for one year
-        <YYYY>0101__<db name>.sql <- Jan 1st backup
-        <YYYY>0115__<db name>.sql <- Jan 15th backup
-        <YYYY>0201__<db name>.sql <- etc.
+        <db name>__<YYYY>0101.sql <- Jan 1st backup
+        <db name>__<YYYY>0115.sql <- Jan 15th backup
+        <db name>__<YYYY>0201.sql <- etc.
 ```
 
 This command assumes you have the [AWS CLI tool](https://aws.amazon.com/cli/) installed and configured.
@@ -88,7 +88,7 @@ Args:
         db_pass = settings.DATABASES['default']['PASSWORD']
         db_port = settings.DATABASES['default']['PORT']
 
-        fname = now.strftime(f"%Y%m%d__{db_name}.sql")
+        fname = now.strftime(f"{db_name}__%Y%m%d.sql")
         fpath = Path(backup_dir, fname)
 
         cmd = [
