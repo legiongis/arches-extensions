@@ -1,9 +1,9 @@
 import json
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from arches_extensions.managers import ExtensionManager
-from arches_extensions.utils import ArchesHelpTextFormatter, ArchesCLIStyles
+from arches_extensions.utils import ArchesCLIStyles, ArchesHelpTextFormatter
 
 s = ArchesCLIStyles()
 
@@ -19,6 +19,8 @@ class Command(BaseCommand):
     """
 
     def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
         self.help = self.__doc__
 
     def add_arguments(self, parser):
@@ -45,7 +47,7 @@ class Command(BaseCommand):
                 elif v == "False":
                     v = False
                 opts[k] = v
-        except Exception as e:
+        except Exception:
             print(s.error(options['opts']))
             print(s.warn("Invalid opts list. Format must be --opts arg1=val1 arg2=val2"))
             exit()
