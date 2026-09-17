@@ -110,6 +110,32 @@ class ExtensionManager:
             if self.extension_type == "report":
                 details['preload_resource_data'] = details.get("preload_resource_data", True)
 
+            if self.extension_type == "search-filter":
+
+                layoutSortorder = details.pop("layoutSortorder", 1)
+                enabled = details.pop("enabled")
+
+                if enabled:
+
+                    standard_search = models.SearchComponent.objects.get(
+                        componentname="standard-search-view"
+                    )
+                    filters = sorted(
+                        standard_search.config["linkedSearchFilters"],
+                        key=lambda x: x["layoutSortorder"]
+                    )
+                    filters.insert(layoutSortorder-1, {
+                        "componentname": details["componentname"],
+                        "searchcomponentid": instance.searchcomponentid,
+                        "layoutSortorder": layoutSortorder,
+                    })
+                    # reset layout sorder to make it sequential
+                    for n, filter in enumerate(filters, start=1):
+                        filter["layoutSortorder"] = n
+
+                    standard_search.config["linkedSearchFilters"] = filters
+                    standard_search.save()
+
             # finally, set the attributes from all of the details values
             for k, v in details.items():
                 setattr(instance, k, v)
@@ -131,6 +157,21 @@ class ExtensionManager:
         except Exception as e:
             logger.error(e)
             raise e
+
+        if isinstance(instance, models.SearchComponent):
+            standard_search = models.SearchComponent.objects.get(
+                componentname="standard-search-view"
+            )
+            filters = [i for i in standard_search.config["linkedSearchFilters"]
+                    if not i["componentname"] == instance.componentname]
+            filters.sort(key=lambda x: x["layoutSortorder"])
+
+            # reset layout sorder to make it sequential
+            for n, filter in enumerate(filters, start=1):
+                filter["layoutSortorder"] = n
+
+            standard_search.config["linkedSearchFilters"] = filters
+            standard_search.save()
 
     def set_active(self, name, active=True):
 
