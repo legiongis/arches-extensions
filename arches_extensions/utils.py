@@ -1,13 +1,25 @@
-import uuid
+import importlib.machinery
+import importlib.util
 import textwrap
-from typing import Union
+import uuid
 from argparse import RawTextHelpFormatter
-
-from django.db.models.functions import Lower
+from typing import Union
 
 from arches.app.models.graph import Graph
+from django.db.models.functions import Lower
 
-class ArchesCLIStyles():
+
+def load_python_source(modname, filename):
+    loader = importlib.machinery.SourceFileLoader(modname, filename)
+    spec = importlib.util.spec_from_file_location(modname, filename, loader=loader)
+    module = importlib.util.module_from_spec(spec)
+    # The module is always executed and not cached in sys.modules.
+    # Uncomment the following line to cache the module.
+    # sys.modules[module.__name__] = module
+    loader.exec_module(module)
+    return module
+
+class ArchesCLIStyles:
     """
 Styles for Arches CLI output. Borrowed heavily from https://stackoverflow.com/a/26445590/3873885.
 

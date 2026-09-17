@@ -1,19 +1,17 @@
-import os
-import imp
 import json
-import uuid
 import logging
-
-from django.db import transaction
-from django.contrib.gis.db.models import UUIDField
+import os
+import uuid
 
 from arches.app.models import models
+from django.contrib.gis.db.models import UUIDField
+from django.db import transaction
 
-from arches_extensions.utils import ArchesCLIStyles
+from arches_extensions.utils import ArchesCLIStyles, load_python_source
 
 logger = logging.getLogger(__name__)
 
-class ExtensionManager():
+class ExtensionManager:
     """ A unified manager class for handling all Arches "extensions," like Widgets, DDataType, etc."""
     def __init__(self, extension_type=None):
         self.model_lookup = {
@@ -35,11 +33,7 @@ class ExtensionManager():
         ## load details from a python module (functions, datatypes, etc.)
         if source_path.endswith(".py"):
 
-            try:
-                source = imp.load_source("", source_path)
-            ## more precise exception handling would be good here
-            except Exception as e:
-                raise(e)
+            source = load_python_source("", source_path)
             details = source.details
 
         ## load details form a json file (widgets, card_components, etc.)
@@ -149,7 +143,7 @@ class ExtensionManager():
             instance.enabled = active
             instance.save()
         else:
-            logger.warn(f"This operation not supported for {self.extension_type}.")
+            logger.warning(f"This operation not supported for {self.extension_type}.")
 
     def print_list(self):
         s = ArchesCLIStyles()
@@ -165,8 +159,6 @@ class ExtensionManager():
                 inactive_str = f"{s.fg.red}inactive{s.reset}"
                 if self.extension_type in ["etl-module", "plugin"]:
                     name = f"{active_str if instance.config['show'] is True else inactive_str} {name}"
-                if self.extension_type in ["search-filter"]:
-                    name = f"{active_str if instance.enabled is True else inactive_str} {name}"
                 print(name)
             print(f"---\nregistered {self.extension_type} count: {instances.count()}")
         except Exception as e:
