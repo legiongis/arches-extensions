@@ -7,13 +7,12 @@ name = "arches-extensions"
 description = "Extra tools to aid with Arches development process."
 version = "0.1.0"
 readme = "README.md"
-requires-python = ">=3.8"
 license = {file = "LICENSE"}
 authors = [
     {name = "Adam Cox", email = "adam@legiongis.com"},
 ]
 dependencies = [
-    "arches<8",
+    "arches>=7.6,<8",
     "setuptools<=80.9.0",
 ]
 
